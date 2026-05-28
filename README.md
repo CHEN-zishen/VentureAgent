@@ -1,6 +1,6 @@
 # VentureAgent
 VentureAgent is an AI-powered business learning platform designed for entrepreneurs and business enthusiasts. Leveraging cutting-edge AI technology from DeepSeek, it offers comprehensive tools to evaluate business plans, analyze market trends, and explore real-world case studies.
-# 创业体验官 - AI驱动的商业学习平台
+# 创业体验官 - Agent驱动的商业学习平台
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
