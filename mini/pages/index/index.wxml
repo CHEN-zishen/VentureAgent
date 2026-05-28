@@ -1,0 +1,154 @@
+<view class="container">
+  <view class="header-section">
+    <view class="greeting">
+      <text class="greeting-text">欢迎来到创业体验官</text>
+      <text class="greeting-sub">AI驱动的商业学习平台</text>
+    </view>
+    <view class="search-box" bindtap="goToSearch">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索案例、知识、评估...</text>
+    </view>
+  </view>
+
+  <view class="quick-actions">
+    <view class="action-card" bindtap="goToEvaluate">
+      <view class="action-icon ai-icon">
+        <text class="action-emoji">🤖</text>
+      </view>
+      <text class="action-title">AI商业评估</text>
+      <text class="action-desc">智能分析项目价值</text>
+    </view>
+    <view class="action-card" bindtap="goToCases">
+      <view class="action-icon case-icon">
+        <text class="action-emoji">📚</text>
+      </view>
+      <text class="action-title">商业案例库</text>
+      <text class="action-desc">海量实战案例分析</text>
+    </view>
+    <view class="action-card" bindtap="goToTrend">
+      <view class="action-icon trend-icon">
+        <text class="action-emoji">📈</text>
+      </view>
+      <text class="action-title">行业趋势</text>
+      <text class="action-desc">洞察市场动态</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">热门案例</text>
+      <text class="section-more" bindtap="goToCases">查看更多 ></text>
+    </view>
+    <scroll-view class="case-scroll" scroll-x="true">
+      <view class="case-card" wx:for="{{hotCases}}" wx:key="id" bindtap="goToCaseDetail" data-id="{{item.id}}">
+        <view class="case-cover">
+          <image class="case-cover-image" src="{{item.coverImage}}" mode="aspectFill" lazy-load="true"></image>
+          <view class="case-cover-overlay">
+            <text class="case-emoji">{{item.emoji}}</text>
+          </view>
+        </view>
+        <view class="case-info">
+          <text class="case-title">{{item.title}}</text>
+          <view class="case-meta">
+            <text class="case-category">{{item.category}}</text>
+            <text class="case-rating">⭐ {{item.rating}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">AI智能评估</text>
+      <text class="section-sub">全方位分析您的商业项目</text>
+    </view>
+    <view class="ai-evaluate-card" bindtap="goToEvaluate">
+      <view class="ai-content">
+        <view class="ai-title-row">
+          <text class="ai-icon">🤖</text>
+          <text class="ai-main-title">智能商业评估</text>
+          <view class="ai-badge">AI驱动</view>
+        </view>
+        <text class="ai-desc">上传您的商业计划书或项目方案，AI将提供专业的评估分析报告</text>
+        <view class="ai-features-grid">
+          <view class="ai-feature-item">
+            <view class="ai-feature-icon bg-blue">💡</view>
+            <text class="ai-feature-title">商业模式</text>
+            <text class="ai-feature-desc">评估盈利模式可行性</text>
+          </view>
+          <view class="ai-feature-item">
+            <view class="ai-feature-icon bg-green">📊</view>
+            <text class="ai-feature-title">市场潜力</text>
+            <text class="ai-feature-desc">分析市场规模与增长</text>
+          </view>
+          <view class="ai-feature-item">
+            <view class="ai-feature-icon bg-orange">⚠️</view>
+            <text class="ai-feature-title">风险预警</text>
+            <text class="ai-feature-desc">识别潜在风险因素</text>
+          </view>
+          <view class="ai-feature-item">
+            <view class="ai-feature-icon bg-purple">✨</view>
+            <text class="ai-feature-title">优化建议</text>
+            <text class="ai-feature-desc">提供专业改进方案</text>
+          </view>
+        </view>
+      </view>
+      <view class="ai-arrow">→</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">商业知识图谱</text>
+      <text class="section-tip">👆 拖动旋转</text>
+    </view>
+    <view class="sphere-container">
+      <view class="sphere-bg-layer" 
+            bindtouchstart="onTouchStart" 
+            bindtouchmove="onTouchMove" 
+            bindtouchend="onTouchEnd"></view>
+      <view class="sphere-wrapper">
+        <view class="sphere-bg"></view>
+        <view class="sphere-ring ring-1"></view>
+        <view class="sphere-ring ring-2"></view>
+        <view wx:for="{{knowledgeNodes}}" 
+              wx:key="id"
+              class="knowledge-node" 
+              style="left: {{item.x}}rpx; top: {{item.y}}rpx; opacity: {{item.opacity}}; transform: scale({{item.scale}}); z-index: {{item.zIndex}}; filter: blur({{item.blur}}rpx);"
+              bindtouchend="handleNodeTap" 
+              data-id="{{item.id}}">
+          <view class="node-icon" style="background: {{item.color}};">
+            <text>{{item.icon}}</text>
+          </view>
+          <text class="node-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="knowledge-hint">
+      <text>💡 点击节点查看对应知识模块</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">学习数据</text>
+    </view>
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-value">10,580</text>
+        <text class="stat-label">学习人次</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">3,200+</text>
+        <text class="stat-label">商业案例</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">98%</text>
+        <text class="stat-label">用户满意度</text>
+      </view>
+    </view>
+  </view>
+</view>

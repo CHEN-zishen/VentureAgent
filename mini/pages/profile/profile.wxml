@@ -1,0 +1,90 @@
+<view class="container">
+  <view class="profile-header">
+    <view class="avatar-section">
+      <view class="avatar" bindtap="getUserInfo">
+        <image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        <text wx:else class="avatar-placeholder">👤</text>
+      </view>
+      <view class="user-info">
+        <text class="username">{{userInfo.nickName || '点击登录'}}</text>
+        <text class="user-level">商学探索者</text>
+      </view>
+    </view>
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.learningDays}}</text>
+        <text class="stat-label">学习天数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.casesStudied}}</text>
+        <text class="stat-label">学习案例</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.evaluations}}</text>
+        <text class="stat-label">评估次数</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToMyCases">
+      <view class="menu-left">
+        <text class="menu-icon">📚</text>
+        <text class="menu-text">我的学习</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToMyEvaluations">
+      <view class="menu-left">
+        <text class="menu-icon">📊</text>
+        <text class="menu-text">我的评估</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToCollections">
+      <view class="menu-left">
+        <text class="menu-icon">⭐</text>
+        <text class="menu-text">我的收藏</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToHistory">
+      <view class="menu-left">
+        <text class="menu-icon">🕐</text>
+        <text class="menu-text">学习历史</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToSettings">
+      <view class="menu-left">
+        <text class="menu-icon">⚙️</text>
+        <text class="menu-text">设置</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToHelp">
+      <view class="menu-left">
+        <text class="menu-icon">❓</text>
+        <text class="menu-text">帮助与反馈</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToAbout">
+      <view class="menu-left">
+        <text class="menu-icon">ℹ️</text>
+        <text class="menu-text">关于我们</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <view class="footer-tip">
+    <text class="tip-text">创业体验官 v1.0.0</text>
+    <text class="tip-text">让商业学习更智能</text>
+  </view>
+</view>

@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="search-header">
+    <view class="search-input-wrapper">
+      <image class="search-icon" src="/assets/icons/search.png" mode="aspectFit"></image>
+      <input 
+        class="search-input" 
+        placeholder="搜索案例、评估、知识..." 
+        value="{{searchKey}}"
+        bindinput="onInputChange"
+        bindconfirm="doSearch"
+        focus="{{true}}"
+      />
+      <text class="clear-btn" bindtap="clearSearch" wx:if="{{searchKey}}">×</text>
+    </view>
+    <text class="cancel-btn" bindtap="goBack">取消</text>
+  </view>
+
+  <view class="search-content">
+    <view class="hot-search" wx:if="{{!searchKey && !showResults}}">
+      <view class="section-title">🔥 热门搜索</view>
+      <view class="hot-tags">
+        <view class="hot-tag" wx:for="{{hotSearch}}" wx:key="index" bindtap="hotSearchTap" data-key="{{item}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <view class="search-history" wx:if="{{!searchKey && history.length > 0 && !showResults}}">
+      <view class="section-header">
+        <text class="section-title">🕐 搜索历史</text>
+        <text class="clear-history" bindtap="clearHistory">清空</text>
+      </view>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{history}}" wx:key="index" bindtap="historyTap" data-key="{{item}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="search-results" wx:if="{{showResults}}">
+      <view class="results-count">找到 {{results.length}} 个相关结果</view>
+      
+      <view class="result-section" wx:if="{{caseResults.length > 0}}">
+        <view class="result-title">📚 案例</view>
+        <view class="result-item" wx:for="{{caseResults}}" wx:key="id" bindtap="goToCase" data-id="{{item.id}}">
+          <text class="result-item-title">{{item.title}}</text>
+          <text class="result-item-desc">{{item.description}}</text>
+        </view>
+      </view>
+
+      <view class="result-section" wx:if="{{knowledgeResults.length > 0}}">
+        <view class="result-title">📖 知识</view>
+        <view class="result-item" wx:for="{{knowledgeResults}}" wx:key="id" bindtap="goToKnowledge" data-id="{{item.id}}">
+          <text class="result-item-title">{{item.title}}</text>
+          <text class="result-item-desc">{{item.summary}}</text>
+        </view>
+      </view>
+
+      <view class="no-results" wx:if="{{results.length === 0}}">
+        <text class="no-results-icon">🔍</text>
+        <text class="no-results-text">未找到相关结果</text>
+        <text class="no-results-tip">试试其他关键词</text>
+      </view>
+    </view>
+  </view>
+</view>

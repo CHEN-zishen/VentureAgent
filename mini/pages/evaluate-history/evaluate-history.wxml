@@ -1,0 +1,148 @@
+<view class="container">
+  <view class="header">
+    <view class="header-title">评估记录</view>
+    <view class="header-subtitle">查看历史评估报告</view>
+  </view>
+
+  <view class="filter-bar">
+    <view class="filter-item {{currentFilter === 'all' ? 'active' : ''}}" bindtap="setFilter" data-filter="all">全部</view>
+    <view class="filter-item {{currentFilter === 'business_plan' ? 'active' : ''}}" bindtap="setFilter" data-filter="business_plan">商业计划</view>
+    <view class="filter-item {{currentFilter === 'investment' ? 'active' : ''}}" bindtap="setFilter" data-filter="investment">投资评估</view>
+    <view class="filter-item {{currentFilter === 'market' ? 'active' : ''}}" bindtap="setFilter" data-filter="market">市场分析</view>
+    <view class="filter-item {{currentFilter === 'risk' ? 'active' : ''}}" bindtap="setFilter" data-filter="risk">风险评估</view>
+  </view>
+
+  <view class="empty-state" wx:if="{{filteredRecords.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无评估记录</view>
+    <view class="empty-sub">完成首次评估后，记录将保存在这里</view>
+    <view class="empty-btn" bindtap="goToEvaluate">去评估</view>
+  </view>
+
+  <scroll-view class="record-list" wx:else scroll-y="true">
+    <view class="record-item" wx:for="{{filteredRecords}}" wx:key="id" bindtap="viewDetail" data-record="{{item}}">
+      <view class="record-left">
+        <view class="record-icon" style="background: {{getGradeColor(item.result.grade)}};">
+          <text>{{item.result.grade}}</text>
+        </view>
+      </view>
+      <view class="record-center">
+        <view class="record-type">{{getTypeName(item.type)}}</view>
+        <view class="record-info">{{item.info}}</view>
+        <view class="record-time">{{item.time}}</view>
+      </view>
+      <view class="record-right">
+        <view class="record-score">
+          <text class="score-num">{{item.result.overallScore}}</text>
+          <text class="score-unit">分</text>
+        </view>
+        <view class="record-arrow">→</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="detail-modal" wx:if="{{showDetail}}" bindtap="closeDetail">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">评估详情</text>
+        <view class="modal-close" bindtap="closeDetail">×</view>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y="true">
+        <view class="result-summary">
+          <view class="result-score" style="background: linear-gradient(135deg, {{getGradeBgColor(selectedRecord.result.grade)}} 0%, #666 100%);">
+            <text class="result-num">{{selectedRecord.result.overallScore}}</text>
+            <text class="result-grade">{{selectedRecord.result.grade}}</text>
+            <text class="result-desc">{{selectedRecord.result.gradeDesc}}</text>
+          </view>
+        </view>
+
+        <view class="dimension-section">
+          <text class="section-title">📊 评估维度</text>
+          <view class="dimension-grid">
+            <view class="dimension-card">
+              <text class="dimension-icon">💡</text>
+              <text class="dimension-name">商业模式</text>
+              <text class="dimension-score" style="color: {{getScoreColor(selectedRecord.result.businessModel.score)}};">{{selectedRecord.result.businessModel.score}}分</text>
+            </view>
+            <view class="dimension-card">
+              <text class="dimension-icon">📈</text>
+              <text class="dimension-name">市场潜力</text>
+              <text class="dimension-score" style="color: {{getScoreColor(selectedRecord.result.marketPotential.score)}};">{{selectedRecord.result.marketPotential.score}}分</text>
+            </view>
+            <view class="dimension-card">
+              <text class="dimension-icon">👥</text>
+              <text class="dimension-name">团队能力</text>
+              <text class="dimension-score" style="color: {{getScoreColor(selectedRecord.result.teamCapability.score)}};">{{selectedRecord.result.teamCapability.score}}分</text>
+            </view>
+            <view class="dimension-card">
+              <text class="dimension-icon">⚙️</text>
+              <text class="dimension-name">产品技术</text>
+              <text class="dimension-score" style="color: {{getScoreColor(selectedRecord.result.productTech.score)}};">{{selectedRecord.result.productTech.score}}分</text>
+            </view>
+            <view class="dimension-card">
+              <text class="dimension-icon">⚠️</text>
+              <text class="dimension-name">风险评估</text>
+              <text class="dimension-score" style="color: {{getScoreColor(selectedRecord.result.riskLevel.score)}};">{{selectedRecord.result.riskLevel.score}}分</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section">
+          <text class="section-title">✅ 项目优势</text>
+          <view class="list-group">
+            <view class="list-item" wx:for="{{selectedRecord.result.advantages}}" wx:key="index">
+              <text class="list-dot">•</text>
+              <text>{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section">
+          <text class="section-title">⚠️ 风险提示</text>
+          <view class="list-group">
+            <view class="list-item" wx:for="{{selectedRecord.result.risks}}" wx:key="index">
+              <text class="list-dot">•</text>
+              <text>{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section">
+          <text class="section-title">💡 优化建议</text>
+          <view class="list-group">
+            <view class="list-item" wx:for="{{selectedRecord.result.suggestions}}" wx:key="index">
+              <text class="list-dot">•</text>
+              <text>{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section">
+          <text class="section-title">📝 评估信息</text>
+          <view class="info-row">
+            <text class="info-label">评估类型：</text>
+            <text class="info-value">{{getTypeName(selectedRecord.type)}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">评估时间：</text>
+            <text class="info-value">{{selectedRecord.time}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">置信度：</text>
+            <text class="info-value">{{selectedRecord.result.confidence}}%</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">分析数据点：</text>
+            <text class="info-value">{{selectedRecord.result.dataPoints}}个</text>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="modal-footer">
+        <view class="footer-btn secondary" bindtap="closeDetail">关闭</view>
+        <view class="footer-btn primary" bindtap="deleteRecord">删除记录</view>
+      </view>
+    </view>
+  </view>
+</view>

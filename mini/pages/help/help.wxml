@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="help-tabs">
+    <view class="tab-item {{currentTab === 'faq' ? 'active' : ''}}" bindtap="switchTab" data-tab="faq">常见问题</view>
+    <view class="tab-item {{currentTab === 'feedback' ? 'active' : ''}}" bindtap="switchTab" data-tab="feedback">意见反馈</view>
+  </view>
+
+  <scroll-view class="help-content" scroll-y="true" wx:if="{{currentTab === 'faq'}}">
+    <view class="faq-list">
+      <view class="faq-item" wx:for="{{faqList}}" wx:key="index">
+        <view class="faq-question" bindtap="toggleFaq" data-index="{{index}}">
+          <text class="question-text">{{item.question}}</text>
+          <text class="question-icon {{item.expanded ? 'expanded' : ''}}">▼</text>
+        </view>
+        <view class="faq-answer" wx:if="{{item.expanded}}">
+          <text class="answer-text">{{item.answer}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="contact-section">
+      <view class="contact-title">联系我们</view>
+      <view class="contact-item" bindtap="copyWechat">
+        <text class="contact-icon">💬</text>
+        <text class="contact-label">微信公众号：创业体验官</text>
+      </view>
+      <view class="contact-item" bindtap="sendEmail">
+        <text class="contact-icon">📧</text>
+        <text class="contact-label">邮箱：CHEN_zishen@outlook.com</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="feedback-form" wx:if="{{currentTab === 'feedback'}}">
+    <view class="form-item">
+      <text class="form-label">反馈类型</text>
+      <view class="type-selector">
+        <view class="type-item {{feedbackType === 'suggestion' ? 'active' : ''}}" bindtap="selectFeedbackType" data-type="suggestion">💡 建议</view>
+        <view class="type-item {{feedbackType === 'bug' ? 'active' : ''}}" bindtap="selectFeedbackType" data-type="bug">🐛 Bug</view>
+        <view class="type-item {{feedbackType === 'other' ? 'active' : ''}}" bindtap="selectFeedbackType" data-type="other">📝 其他</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">问题描述</text>
+      <textarea class="feedback-input" placeholder="请详细描述您的问题或建议..." value="{{feedbackContent}}" bindinput="onContentChange" maxlength="500"></textarea>
+      <text class="char-count">{{feedbackContent.length}}/500</text>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">联系方式（选填）</text>
+      <input class="contact-input" placeholder="请输入手机号或邮箱" value="{{contact}}" bindinput="onContactChange"/>
+    </view>
+
+    <view class="submit-btn" bindtap="submitFeedback">提交反馈</view>
+  </view>
+</view>

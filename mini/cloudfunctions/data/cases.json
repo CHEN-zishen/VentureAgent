@@ -1,0 +1,308 @@
+[
+  {
+    "title": "字节跳动 TikTok 全球化战略：如何征服海外市场",
+    "category": "互联网",
+    "summary": "TikTok 作为字节跳动旗下的短视频社交平台，在短短几年内迅速成为全球最受欢迎的应用之一。本案例深入分析 TikTok 的全球化战略，包括其产品定位、内容推荐算法、本地化运营策略以及应对各国监管挑战的策略。",
+    "coverImage": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800",
+      "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800",
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800"
+    ],
+    "problems": [
+      "如何在全球不同市场进行本地化运营",
+      "如何应对各国不同的监管政策",
+      "如何在已有巨头的市场中突围",
+      "如何保持用户增长和活跃度"
+    ],
+    "solutions": [
+      {
+        "icon": "🎯",
+        "title": "精准的产品定位",
+        "desc": "针对不同市场用户偏好进行产品功能调整"
+      },
+      {
+        "icon": "🧠",
+        "title": "强大的推荐算法",
+        "desc": "基于用户行为数据不断优化推荐系统"
+      },
+      {
+        "icon": "🌏",
+        "title": "本地化团队",
+        "desc": "在各主要市场建立本地团队"
+      },
+      {
+        "icon": "⚖️",
+        "title": "合规运营",
+        "desc": "积极配合各国监管要求"
+      }
+    ],
+    "stats": [
+      { "name": "全球下载量", "value": "30 亿+" },
+      { "name": "日活用户", "value": "10 亿+" },
+      { "name": "覆盖国家", "value": "150+" },
+      { "name": "营收规模", "value": "$100 亿+" }
+    ],
+    "tags": ["全球化", "短视频", "算法推荐", "产品运营"],
+    "sourceUrl": "https://www.tiktok.com",
+    "sourceName": "TikTok 官方网站",
+    "rating": 4.9,
+    "difficulty": "hard",
+    "difficultyText": "困难"
+  },
+  {
+    "title": "小米生态链模式：打造智能生活帝国",
+    "category": "智能硬件",
+    "summary": "小米通过独特的生态链模式，从手机制造商发展成为全球领先的智能生活平台。本案例分析小米如何通过投资孵化、共享资源、统一标准等方式，构建了一个涵盖智能家居、智能穿戴、智能出行等多个领域的庞大生态系统。",
+    "coverImage": "https://images.unsplash.com/photo-1550769032-ca5 节奏 0e6dcd?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1550769032-ca5 节奏 0e6dcd?w=800",
+      "https://images.unsplash.com/photo-1585063182-1d4c39ab97c2?w=800",
+      "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=800"
+    ],
+    "problems": [
+      "如何在多个领域保持产品品质和创新",
+      "如何平衡生态链企业的独立性与协同效应",
+      "如何应对供应链挑战",
+      "如何在低价策略下保持盈利"
+    ],
+    "solutions": [
+      {
+        "icon": "💰",
+        "title": "轻资产模式",
+        "desc": "通过投资而非收购的方式，保持生态链企业的独立性"
+      },
+      {
+        "icon": "🔧",
+        "title": "资源共享",
+        "desc": "共享供应链、渠道、品牌和用户数据"
+      },
+      {
+        "icon": "📐",
+        "title": "统一标准",
+        "desc": "制定统一的技术标准和质量标准"
+      },
+      {
+        "icon": "📈",
+        "title": "极致性价比",
+        "desc": "通过规模效应和效率优化，实现产品的高性价比"
+      }
+    ],
+    "stats": [
+      { "name": "生态链企业", "value": "200+" },
+      { "name": "产品品类", "value": "2000+" },
+      { "name": "IoT 连接数", "value": "5 亿+" },
+      { "name": "年营收", "value": "¥3000 亿+" }
+    ],
+    "tags": ["生态链", "智能家居", "IoT", "商业模式"],
+    "sourceUrl": "https://www.mi.com",
+    "sourceName": "小米官方网站",
+    "rating": 4.8,
+    "difficulty": "medium",
+    "difficultyText": "中等"
+  },
+  {
+    "title": "瑞幸咖啡：从危机到重生的逆袭之路",
+    "category": "消费",
+    "summary": "瑞幸咖啡经历了财务造假危机后，通过管理层重组、业务调整和战略转型，实现了令人瞩目的逆袭。本案例分析瑞幸如何在危机中找到突破口，重新赢得市场信任并实现盈利。",
+    "coverImage": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
+      "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800"
+    ],
+    "problems": [
+      "如何重建品牌信任",
+      "如何优化成本结构实现盈利",
+      "如何应对激烈的市场竞争",
+      "如何实现可持续增长"
+    ],
+    "solutions": [
+      {
+        "icon": "🔄",
+        "title": "管理层重组",
+        "desc": "引入新的管理团队，完善公司治理结构"
+      },
+      {
+        "icon": "⚡",
+        "title": "效率提升",
+        "desc": "通过数字化运营和智能供应链，大幅降低运营成本"
+      },
+      {
+        "icon": "🥤",
+        "title": "产品创新",
+        "desc": "持续推出爆款产品，提升产品差异化竞争力"
+      },
+      {
+        "icon": "🛒",
+        "title": "渠道拓展",
+        "desc": "从线下门店向电商和外卖渠道拓展"
+      }
+    ],
+    "stats": [
+      { "name": "门店数量", "value": "8000+" },
+      { "name": "年销量", "value": "10 亿杯+" },
+      { "name": "市场份额", "value": "25%+" },
+      { "name": "净利润", "value": "¥10 亿+" }
+    ],
+    "tags": ["危机管理", "品牌重塑", "消费升级", "数字化运营"],
+    "sourceUrl": "https://www.luckincoffee.com",
+    "sourceName": "瑞幸咖啡官方网站",
+    "rating": 4.7,
+    "difficulty": "medium",
+    "difficultyText": "中等"
+  },
+  {
+    "title": "拼多多：社交电商的颠覆者",
+    "category": "电商",
+    "summary": "拼多多凭借独特的社交拼团模式，在阿里和京东的夹击下异军突起，成为中国电商市场的第三极。本案例分析拼多多如何通过社交裂变、低价策略、下沉市场布局等方式，快速积累用户并实现盈利。",
+    "coverImage": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800"
+    ],
+    "problems": [
+      "如何在电商巨头的包围中找到差异化定位",
+      "如何解决低价与品质的矛盾",
+      "如何实现盈利转型",
+      "如何应对监管挑战"
+    ],
+    "solutions": [
+      {
+        "icon": "👥",
+        "title": "社交裂变",
+        "desc": "通过拼团、砍价等社交玩法，实现用户的病毒式增长"
+      },
+      {
+        "icon": "🏭",
+        "title": "直连工厂",
+        "desc": "缩短供应链环节，直接对接工厂"
+      },
+      {
+        "icon": "🌾",
+        "title": "下沉市场",
+        "desc": "聚焦三四线城市和农村市场，挖掘增量用户"
+      },
+      {
+        "icon": "📦",
+        "title": "农货上行",
+        "desc": "帮助农产品直达消费者"
+      }
+    ],
+    "stats": [
+      { "name": "年活跃用户", "value": "8 亿+" },
+      { "name": "GMV", "value": "¥3.5 万亿+" },
+      { "name": "商家数量", "value": "1000 万+" },
+      { "name": "净利润", "value": "¥300 亿+" }
+    ],
+    "tags": ["社交电商", "下沉市场", "供应链", "商业模式创新"],
+    "sourceUrl": "https://www.pinduoduo.com",
+    "sourceName": "拼多多官方网站",
+    "rating": 4.6,
+    "difficulty": "hard",
+    "difficultyText": "困难"
+  },
+  {
+    "title": "华为鸿蒙系统：国产操作系统的崛起",
+    "category": "科技",
+    "summary": "面对美国的技术封锁，华为推出了自主研发的鸿蒙操作系统，实现了从手机到 IoT 设备的全场景覆盖。本案例分析鸿蒙系统的技术架构、生态建设策略以及在全球市场的推广路径。",
+    "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800",
+      "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=800",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800"
+    ],
+    "problems": [
+      "如何建立完整的应用生态",
+      "如何与安卓和 iOS 竞争",
+      "如何获得开发者支持",
+      "如何应对国际市场的挑战"
+    ],
+    "solutions": [
+      {
+        "icon": "🔗",
+        "title": "分布式架构",
+        "desc": "采用分布式设计，支持多设备协同"
+      },
+      {
+        "icon": "🤝",
+        "title": "开放生态",
+        "desc": "开放源代码，吸引全球开发者参与"
+      },
+      {
+        "icon": "📱",
+        "title": "多终端覆盖",
+        "desc": "从手机到智能穿戴、智能家居，构建全场景生态"
+      },
+      {
+        "icon": "🌐",
+        "title": "全球化布局",
+        "desc": "在全球范围内建立开发者社区"
+      }
+    ],
+    "stats": [
+      { "name": "装机量", "value": "7 亿+" },
+      { "name": "开发者数量", "value": "200 万+" },
+      { "name": "生态设备", "value": "2 亿+" },
+      { "name": "应用数量", "value": "100 万+" }
+    ],
+    "tags": ["操作系统", "自主创新", "IoT", "技术突破"],
+    "sourceUrl": "https://www.harmonyos.com",
+    "sourceName": "鸿蒙官方网站",
+    "rating": 4.9,
+    "difficulty": "hard",
+    "difficultyText": "困难"
+  },
+  {
+    "title": "泡泡玛特：盲盒经济的开创者",
+    "category": "消费",
+    "summary": "泡泡玛特通过盲盒模式和 IP 运营，将潮玩从小众爱好变成了全民热潮。本案例分析泡泡玛特如何通过 IP 孵化、线下门店布局、会员体系建设等方式，构建了一个独特的潮玩帝国。",
+    "coverImage": "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800",
+    "images": [
+      "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=800",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800"
+    ],
+    "problems": [
+      "如何持续推出受欢迎的 IP",
+      "如何应对盲盒模式的争议",
+      "如何保持用户的复购率",
+      "如何拓展海外市场"
+    ],
+    "solutions": [
+      {
+        "icon": "🎨",
+        "title": "IP 孵化",
+        "desc": "建立完整的 IP 孵化体系"
+      },
+      {
+        "icon": "🏪",
+        "title": "线下体验",
+        "desc": "打造沉浸式线下门店"
+      },
+      {
+        "icon": "👑",
+        "title": "会员体系",
+        "desc": "建立完善的会员体系"
+      },
+      {
+        "icon": "🌍",
+        "title": "全球化",
+        "desc": "在全球主要城市布局"
+      }
+    ],
+    "stats": [
+      { "name": "IP 数量", "value": "100+" },
+      { "name": "门店数量", "value": "300+" },
+      { "name": "会员数量", "value": "2000 万+" },
+      { "name": "年营收", "value": "¥50 亿+" }
+    ],
+    "tags": ["潮玩", "盲盒经济", "IP 运营", "消费升级"],
+    "sourceUrl": "https://www.popmart.com",
+    "sourceName": "泡泡玛特官方网站",
+    "rating": 4.5,
+    "difficulty": "easy",
+    "difficultyText": "简单"
+  }
+]

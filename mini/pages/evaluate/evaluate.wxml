@@ -1,0 +1,497 @@
+<view class="container">
+  <view class="header-banner">
+    <view class="banner-content">
+      <view class="ai-badge">
+        <text class="badge-text">AI</text>
+      </view>
+      <text class="banner-title">智能商业评估</text>
+      <text class="banner-desc">基于深度学习的商业项目评估分析</text>
+    </view>
+    <view class="banner-decoration">
+      <text class="deco-emoji">📊</text>
+    </view>
+    <view class="history-btn" bindtap="goToHistory">
+      <text class="history-icon">📋</text>
+      <text class="history-text">历史记录</text>
+    </view>
+  </view>
+
+  <view class="evaluate-types">
+    <text class="section-title">选择评估类型</text>
+    <view class="type-grid">
+      <view class="type-item {{selectedType === 'business_plan' ? 'active' : ''}}" bindtap="selectType" data-type="business_plan">
+        <view class="type-icon">📝</view>
+        <text class="type-name">商业计划书</text>
+        <text class="type-desc">评估创业项目可行性</text>
+      </view>
+      <view class="type-item {{selectedType === 'investment' ? 'active' : ''}}" bindtap="selectType" data-type="investment">
+        <view class="type-icon">💰</view>
+        <text class="type-name">投资评估</text>
+        <text class="type-desc">分析投资价值与风险</text>
+      </view>
+      <view class="type-item {{selectedType === 'market' ? 'active' : ''}}" bindtap="selectType" data-type="market">
+        <view class="type-icon">🎯</view>
+        <text class="type-name">市场分析</text>
+        <text class="type-desc">评估市场潜力与竞争</text>
+      </view>
+      <view class="type-item {{selectedType === 'risk' ? 'active' : ''}}" bindtap="selectType" data-type="risk">
+        <view class="type-icon">⚠️</view>
+        <text class="type-name">风险评估</text>
+        <text class="type-desc">识别项目潜在风险</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-section">
+    <text class="section-title">输入项目信息</text>
+    <view class="input-card">
+      <textarea class="project-input" placeholder="请详细描述您的项目内容、商业模式、团队情况、市场定位等信息..." value="{{projectInfo}}" bindinput="onInputChange" maxlength="2000" placeholder-class="placeholder"></textarea>
+      <view class="input-footer">
+        <text class="char-count">{{projectInfo.length}}/2000</text>
+      </view>
+    </view>
+
+    <view class="upload-section">
+      <text class="upload-title">上传附件（可选）</text>
+      <view class="upload-btns">
+        <view class="upload-btn" bindtap="chooseImage">
+          <text class="upload-icon">🖼️</text>
+          <text class="upload-text">上传图片</text>
+        </view>
+        <view class="upload-btn" bindtap="chooseFile">
+          <text class="upload-icon">📄</text>
+          <text class="upload-text">上传文档</text>
+        </view>
+      </view>
+      <view class="upload-list" wx:if="{{uploads.length > 0}}">
+        <view class="upload-item {{item.type === 'image' ? 'image' : 'file'}}" wx:for="{{uploads}}" wx:key="index" bindtap="{{item.type === 'image' ? 'previewImage' : ''}}" data-path="{{item.path}}">
+          <text class="upload-item-icon">{{item.type === 'image' ? '🖼️' : (item.icon || '📄')}}</text>
+          <view class="upload-item-info">
+            <text class="upload-item-name">{{item.name}}</text>
+            <text class="upload-item-size">{{item.size}} MB</text>
+          </view>
+          <text class="upload-item-remove" catchtap="removeUpload" data-index="{{index}}">×</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="submit-section">
+    <button class="submit-btn {{isLoading ? 'loading' : ''}}" bindtap="submitEvaluation" disabled="{{isLoading || !projectInfo}}">
+      <view class="btn-content" wx:if="{{!isLoading}}">
+        <text class="btn-icon">🤖</text>
+        <text class="btn-text">开始AI评估</text>
+      </view>
+      <view class="loading-content" wx:if="{{isLoading}}">
+        <view class="loading-spinner"></view>
+        <text class="loading-text">AI分析中...</text>
+      </view>
+    </button>
+  </view>
+
+  <!-- AI评估加载弹窗 -->
+  <view class="loading-modal {{isLoading ? 'show' : ''}}" wx:if="{{isLoading}}">
+    <view class="loading-overlay"></view>
+    <view class="loading-content">
+      <!-- 上半部分：AI图标和标题 -->
+      <view class="top-section">
+        <view class="ai-icon-box">
+          <view class="ai-pulse-ring"></view>
+          <text class="ai-emoji">🤖</text>
+        </view>
+        <text class="loading-title">AI 评估中</text>
+        <text class="loading-desc">正在分析您的项目...</text>
+      </view>
+
+      <!-- 下半部分：状态、进度、步骤 -->
+      <view class="bottom-section">
+        <!-- 当前状态 -->
+        <view class="status-section">
+          <text class="status-text">{{currentStatus}}</text>
+          <view class="typing-indicator" wx:if="{{isTyping}}">
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+          </view>
+        </view>
+
+        <!-- 进度条 -->
+        <view class="progress-section">
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{loadingProgress}}%;"></view>
+            <view class="progress-glow" style="left: {{loadingProgress}}%;"></view>
+          </view>
+          <text class="progress-text">{{Math.round(loadingProgress)}}%</text>
+        </view>
+
+        <!-- 步骤指示 -->
+        <view class="steps-section">
+          <view class="step-item {{currentStep >= 1 ? 'active' : ''}} {{currentStep > 1 ? 'done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">数据解析</text>
+          </view>
+          <view class="step-item {{currentStep >= 2 ? 'active' : ''}} {{currentStep > 2 ? 'done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">模型评估</text>
+          </view>
+          <view class="step-item {{currentStep >= 3 ? 'active' : ''}} {{currentStep > 3 ? 'done' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">报告生成</text>
+          </view>
+          <view class="step-item {{currentStep >= 4 ? 'active' : ''}}">
+            <view class="step-dot"></view>
+            <text class="step-text">完成</text>
+          </view>
+        </view>
+
+        <!-- 底部提示 -->
+        <view class="loading-footer">
+          <text class="footer-text">预计需要 10-30 秒</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="result-modal {{showResult ? 'show' : ''}}" wx:if="{{showResult}}">
+    <view class="result-overlay" bindtap="closeResult"></view>
+    <view class="result-content">
+      <view class="result-header">
+        <text class="result-title">AI智能评估报告</text>
+        <text class="result-close" bindtap="closeResult">×</text>
+      </view>
+      <scroll-view class="result-scroll" scroll-y="true">
+        <view class="report-header">
+          <text class="result-time">生成时间：{{resultTime}}</text>
+          <view class="report-meta">
+            <view class="meta-item">
+              <text class="meta-icon">🎯</text>
+              <text class="meta-text">置信度 {{resultData.confidence}}%</text>
+            </view>
+            <view class="meta-item">
+              <text class="meta-icon">📊</text>
+              <text class="meta-text">分析数据 {{resultData.dataPoints}}+ 项</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="score-card">
+          <view class="score-main">
+            <view class="score-circle">
+              <view class="score-ring">
+                <text class="score-value">{{resultData.overallScore}}</text>
+                <text class="score-label">综合评分</text>
+              </view>
+            </view>
+            <view class="score-grade-wrap">
+              <view class="score-grade" style="background: linear-gradient(135deg, {{resultData.overallScore >= 80 ? '#4a90e2' : resultData.overallScore >= 60 ? '#ff9900' : '#ff4d4f'}} 0%, {{resultData.overallScore >= 80 ? '#357abd' : resultData.overallScore >= 60 ? '#e68a00' : '#e04040'}} 100%);">
+                <text class="grade-text">{{resultData.grade}}</text>
+                <text class="grade-desc">{{resultData.gradeDesc}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="score-summary">
+            <text class="summary-text">基于对商业模式、市场潜力、团队能力、产品技术和风险五个维度的综合分析，您的项目评估结果为 <text class="highlight">{{resultData.gradeDesc}}</text></text>
+          </view>
+        </view>
+
+        <view class="dimension-summary">
+          <view class="dim-item">
+            <view class="dim-dot" style="background: #4a90e2;"></view>
+            <text class="dim-name">商业模式</text>
+            <text class="dim-score">{{resultData.businessModel.score}}</text>
+          </view>
+          <view class="dim-item">
+            <view class="dim-dot" style="background: #48b879;"></view>
+            <text class="dim-name">市场潜力</text>
+            <text class="dim-score">{{resultData.marketPotential.score}}</text>
+          </view>
+          <view class="dim-item">
+            <view class="dim-dot" style="background: #ff9900;"></view>
+            <text class="dim-name">团队能力</text>
+            <text class="dim-score">{{resultData.teamCapability.score}}</text>
+          </view>
+          <view class="dim-item">
+            <view class="dim-dot" style="background: #00bcd4;"></view>
+            <text class="dim-name">产品技术</text>
+            <text class="dim-score">{{resultData.productTech.score}}</text>
+          </view>
+          <view class="dim-item">
+            <view class="dim-dot" style="background: #9c27b0;"></view>
+            <text class="dim-name">风险评估</text>
+            <text class="dim-score">{{resultData.riskLevel.score}}</text>
+          </view>
+        </view>
+
+        <view class="radar-section">
+          <text class="section-title">📈 五维能力分析</text>
+          <view class="radar-chart">
+            <view class="radar-grid">
+              <view class="radar-ring-outer"></view>
+              <view class="radar-ring-middle"></view>
+              <view class="radar-ring-inner"></view>
+            </view>
+            <view class="radar-nodes">
+              <view class="radar-node node-1" style="width: {{resultData.businessModel.score}}%; height: {{resultData.businessModel.score}}%;"></view>
+              <view class="radar-node node-2" style="width: {{resultData.marketPotential.score}}%; height: {{resultData.marketPotential.score}}%;"></view>
+              <view class="radar-node node-3" style="width: {{resultData.teamCapability.score}}%; height: {{resultData.teamCapability.score}}%;"></view>
+              <view class="radar-node node-4" style="width: {{resultData.productTech.score}}%; height: {{resultData.productTech.score}}%;"></view>
+              <view class="radar-node node-5" style="width: {{resultData.riskLevel.score}}%; height: {{resultData.riskLevel.score}}%;"></view>
+            </view>
+            <view class="radar-labels">
+              <text class="radar-label label-top">商业模式</text>
+              <text class="radar-label label-right">市场潜力</text>
+              <text class="radar-label label-bottom-right">团队能力</text>
+              <text class="radar-label label-bottom-left">产品技术</text>
+              <text class="radar-label label-left">风险评估</text>
+            </view>
+          </view>
+          <view class="radar-legend">
+            <view class="legend-item">
+              <view class="legend-dot" style="background: #4a90e2;"></view>
+              <text class="legend-text">商业模式 {{resultData.businessModel.score}}分</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot" style="background: #48b879;"></view>
+              <text class="legend-text">市场潜力 {{resultData.marketPotential.score}}分</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot" style="background: #ff9900;"></view>
+              <text class="legend-text">团队能力 {{resultData.teamCapability.score}}分</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot" style="background: #00bcd4;"></view>
+              <text class="legend-text">产品技术 {{resultData.productTech.score}}分</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot" style="background: #9c27b0;"></view>
+              <text class="legend-text">风险评估 {{resultData.riskLevel.score}}分</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="detail-section">
+          <view class="section-title">🎯 指标详细分析</view>
+          
+          <view class="indicator-card">
+            <view class="indicator-header">
+              <view class="indicator-icon bg-blue">💡</view>
+              <view class="indicator-info">
+                <text class="indicator-name">商业模式</text>
+                <text class="indicator-level">{{resultData.businessModel.level}}</text>
+              </view>
+              <view class="indicator-score">{{resultData.businessModel.score}}</view>
+            </view>
+            <view class="indicator-reason">{{resultData.businessModel.reason}}</view>
+            <view class="indicator-factors">
+              <view class="factor-item" wx:for="{{resultData.businessModel.factors}}" wx:key="name">
+                <text class="factor-name">{{item.name}}</text>
+                <view class="factor-bar-track">
+                  <view class="factor-bar-fill" style="width: {{item.score}}%;"></view>
+                </view>
+                <text class="factor-score">{{item.score}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="indicator-card">
+            <view class="indicator-header">
+              <view class="indicator-icon bg-green">📊</view>
+              <view class="indicator-info">
+                <text class="indicator-name">市场潜力</text>
+                <text class="indicator-level">{{resultData.marketPotential.level}}</text>
+              </view>
+              <view class="indicator-score">{{resultData.marketPotential.score}}</view>
+            </view>
+            <view class="indicator-reason">{{resultData.marketPotential.reason}}</view>
+            <view class="indicator-factors">
+              <view class="factor-item" wx:for="{{resultData.marketPotential.factors}}" wx:key="name">
+                <text class="factor-name">{{item.name}}</text>
+                <view class="factor-bar-track">
+                  <view class="factor-bar-fill" style="width: {{item.score}}%;"></view>
+                </view>
+                <text class="factor-score">{{item.score}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="indicator-card">
+            <view class="indicator-header">
+              <view class="indicator-icon bg-orange">👥</view>
+              <view class="indicator-info">
+                <text class="indicator-name">团队能力</text>
+                <text class="indicator-level">{{resultData.teamCapability.level}}</text>
+              </view>
+              <view class="indicator-score">{{resultData.teamCapability.score}}</view>
+            </view>
+            <view class="indicator-reason">{{resultData.teamCapability.reason}}</view>
+            <view class="indicator-factors">
+              <view class="factor-item" wx:for="{{resultData.teamCapability.factors}}" wx:key="name">
+                <text class="factor-name">{{item.name}}</text>
+                <view class="factor-bar-track">
+                  <view class="factor-bar-fill" style="width: {{item.score}}%;"></view>
+                </view>
+                <text class="factor-score">{{item.score}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="indicator-card">
+            <view class="indicator-header">
+              <view class="indicator-icon bg-cyan">⚙️</view>
+              <view class="indicator-info">
+                <text class="indicator-name">产品技术</text>
+                <text class="indicator-level">{{resultData.productTech.level}}</text>
+              </view>
+              <view class="indicator-score">{{resultData.productTech.score}}</view>
+            </view>
+            <view class="indicator-reason">{{resultData.productTech.reason}}</view>
+            <view class="indicator-factors">
+              <view class="factor-item" wx:for="{{resultData.productTech.factors}}" wx:key="name">
+                <text class="factor-name">{{item.name}}</text>
+                <view class="factor-bar-track">
+                  <view class="factor-bar-fill" style="width: {{item.score}}%;"></view>
+                </view>
+                <text class="factor-score">{{item.score}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="indicator-card">
+            <view class="indicator-header">
+              <view class="indicator-icon bg-purple">🛡️</view>
+              <view class="indicator-info">
+                <text class="indicator-name">风险评估</text>
+                <text class="indicator-level">{{resultData.riskLevel.level}}</text>
+              </view>
+              <view class="indicator-score">{{resultData.riskLevel.score}}</view>
+            </view>
+            <view class="indicator-reason">{{resultData.riskLevel.reason}}</view>
+            <view class="indicator-factors">
+              <view class="factor-item" wx:for="{{resultData.riskLevel.factors}}" wx:key="name">
+                <text class="factor-name">{{item.name}}</text>
+                <view class="factor-bar-track">
+                  <view class="factor-bar-fill" style="width: {{item.score}}%;"></view>
+                </view>
+                <text class="factor-score">{{item.score}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="financial-section" wx:if="{{resultData.financialAnalysis}}">
+          <view class="section-title">💰 财务分析</view>
+          
+          <view class="financial-summary">
+            <text class="summary-text">{{resultData.financialAnalysis.summary}}</text>
+          </view>
+
+          <view class="metrics-grid">
+            <view class="metric-card" wx:for="{{resultData.financialAnalysis.keyMetrics}}" wx:key="name">
+              <text class="metric-name">{{item.name}}</text>
+              <text class="metric-value" style="color: {{item.status === 'good' ? '#4CAF50' : item.status === 'medium' ? '#FF9800' : '#F44336'}};">{{item.value}}</text>
+              <view class="metric-indicator {{item.status}}"></view>
+            </view>
+          </view>
+
+          <view class="financial-chart-section">
+            <text class="chart-title">📈 5年财务预测</text>
+            <view class="chart-container">
+              <view class="chart-bars">
+                <view class="bar-item" wx:for="{{resultData.financialAnalysis.financialData}}" wx:key="year">
+                  <view class="bar-wrapper">
+                    <view class="bar revenue-bar" style="height: {{item.revenuePercent}}%;"></view>
+                    <view class="bar profit-bar" style="height: {{item.profitPercent}}%;"></view>
+                  </view>
+                  <text class="bar-label">{{item.year}}</text>
+                  <text class="bar-value">{{item.revenueLabel}}</text>
+                </view>
+              </view>
+              <view class="chart-legend">
+                <view class="legend-item">
+                  <view class="legend-color revenue"></view>
+                  <text>营收</text>
+                </view>
+                <view class="legend-item">
+                  <view class="legend-color profit"></view>
+                  <text>净利润</text>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="financial-table">
+            <text class="table-title">📋 财务数据明细</text>
+            <view class="table-header">
+              <text class="th">年份</text>
+              <text class="th">营收(万)</text>
+              <text class="th">成本(万)</text>
+              <text class="th">毛利率</text>
+              <text class="th">净利润(万)</text>
+              <text class="th">净利率</text>
+            </view>
+            <view class="table-body">
+              <view class="table-row" wx:for="{{resultData.financialAnalysis.financialData}}" wx:key="year">
+                <text class="td">{{item.year}}</text>
+                <text class="td">{{item.revenue}}</text>
+                <text class="td">{{item.cost}}</text>
+                <text class="td">{{item.grossMargin}}%</text>
+                <text class="td" style="color: {{item.netProfit >= 0 ? '#4CAF50' : '#F44336'}};">{{item.netProfit >= 0 ? '+' : ''}}{{item.netProfit}}</text>
+                <text class="td" style="color: {{item.netMargin >= 0 ? '#4CAF50' : '#F44336'}};">{{item.netMargin}}%</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="disclaimer">
+            <text class="disclaimer-icon">⚠️</text>
+            <text class="disclaimer-text">财务预测模型仅供参考，实际投资决策请结合更多因素综合评估</text>
+          </view>
+        </view>
+
+        <view class="analysis-card">
+          <text class="analysis-title">✅ 核心优势</text>
+          <view class="analysis-list">
+            <view class="analysis-item" wx:for="{{resultData.advantages}}" wx:key="index">
+              <view class="item-bullet-wrap">
+                <text class="item-bullet">✓</text>
+              </view>
+              <text class="item-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="analysis-card risk-card">
+          <text class="analysis-title">⚠️ 潜在风险</text>
+          <view class="analysis-list">
+            <view class="analysis-item risk" wx:for="{{resultData.risks}}" wx:key="index">
+              <view class="item-bullet-wrap risk">
+                <text class="item-bullet">!</text>
+              </view>
+              <text class="item-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="analysis-card suggestion-card">
+          <text class="analysis-title">💡 优化建议</text>
+          <view class="suggestion-list">
+            <view class="suggestion-item" wx:for="{{resultData.suggestions}}" wx:key="index">
+              <view class="suggestion-num">{{index + 1}}</view>
+              <text class="suggestion-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="action-btns">
+          <button class="action-btn secondary" bindtap="shareResult">
+            <text>📤</text>
+            <text>分享报告</text>
+          </button>
+          <button class="action-btn primary" bindtap="saveResult">
+            <text>💾</text>
+            <text>保存记录</text>
+          </button>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

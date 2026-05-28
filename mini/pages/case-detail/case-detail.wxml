@@ -1,0 +1,105 @@
+<view class="container">
+  <view class="case-header">
+    <image class="case-banner" src="{{caseData.coverImage}}" mode="aspectFill"></image>
+    <view class="case-header-overlay">
+      <view class="case-emoji-large">{{caseData.emoji}}</view>
+      <text class="case-category-badge">{{caseData.category}}</text>
+    </view>
+  </view>
+
+  <view class="case-content">
+    <view class="case-title-section">
+      <text class="case-title">{{caseData.title}}</text>
+      <view class="case-meta">
+        <text class="case-rating">⭐ {{caseData.rating}}</text>
+        <text class="case-difficulty {{caseData.difficulty}}">{{caseData.difficultyText}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📋 案例概述</text>
+      <view class="content-card">
+        <text class="content-text">{{caseData.summary}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🎯 核心问题</text>
+      <view class="content-card">
+        <view class="problem-list">
+          <view class="problem-item" wx:for="{{caseData.problems}}" wx:key="index">
+            <text class="problem-number">{{index + 1}}</text>
+            <text class="problem-text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">💡 解决方案</text>
+      <view class="content-card">
+        <view class="solution-list">
+          <view class="solution-item" wx:for="{{caseData.solutions}}" wx:key="index">
+            <view class="solution-icon">{{item.icon}}</view>
+            <view class="solution-content">
+              <text class="solution-title">{{item.title}}</text>
+              <text class="solution-desc">{{item.desc}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📊 关键数据</text>
+      <view class="stats-grid">
+        <view class="stat-card" wx:for="{{caseData.stats}}" wx:key="name">
+          <text class="stat-value">{{item.value}}</text>
+          <text class="stat-label">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📈 案例图片</text>
+      <view class="image-grid">
+        <image class="case-image" wx:for="{{caseData.images}}" wx:key="index" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-src="{{item}}"></image>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📚 知识点</text>
+      <view class="knowledge-tags">
+        <text class="knowledge-tag" wx:for="{{caseData.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🔗 来源链接</text>
+      <view class="source-card" bindtap="copySource" data-url="{{caseData.sourceUrl}}">
+        <view class="source-info">
+          <text class="source-icon">🌐</text>
+          <text class="source-text">{{caseData.sourceName}}</text>
+        </view>
+        <text class="source-arrow">→</text>
+      </view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bar-btn" bindtap="toggleCollect">
+      <text class="bar-icon">{{isCollected ? '❤️' : '🤍'}}</text>
+      <text class="bar-text">{{isCollected ? '已收藏' : '收藏'}}</text>
+    </view>
+    <view class="bar-btn primary" bindtap="goToEvaluate">
+      <text class="bar-icon">🤖</text>
+      <text class="bar-text">AI评估</text>
+    </view>
+    <view class="bar-btn" bindtap="shareCase">
+      <text class="bar-icon">📤</text>
+      <text class="bar-text">分享</text>
+    </view>
+  </view>
+</view>

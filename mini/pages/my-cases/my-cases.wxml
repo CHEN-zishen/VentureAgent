@@ -1,0 +1,68 @@
+<view class="container">
+  <view class="learning-stats">
+    <view class="stat-item">
+      <text class="stat-value">{{stats.casesStudied}}</text>
+      <text class="stat-label">已学案例</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.learningDays}}</text>
+      <text class="stat-label">学习天数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.totalHours}}</text>
+      <text class="stat-label">累计学时</text>
+    </view>
+  </view>
+
+  <view class="learning-tabs">
+    <view class="tab-item {{currentTab === 'in_progress' ? 'active' : ''}}" 
+          bindtap="switchTab" 
+          data-tab="in_progress">
+      进行中
+    </view>
+    <view class="tab-item {{currentTab === 'completed' ? 'active' : ''}}" 
+          bindtap="switchTab" 
+          data-tab="completed">
+      已完成
+    </view>
+    <view class="tab-item {{currentTab === 'favorites' ? 'active' : ''}}" 
+          bindtap="switchTab" 
+          data-tab="favorites">
+      收藏夹
+    </view>
+  </view>
+
+  <scroll-view class="learning-list" scroll-y="true">
+    <view class="learning-card" 
+          wx:for="{{learningCases}}" 
+          wx:key="id"
+          bindtap="goToCase" 
+          data-id="{{item.id}}">
+      <view class="card-cover" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}99 100%);">
+        <text class="card-emoji">{{item.emoji}}</text>
+      </view>
+      <view class="card-info">
+        <text class="card-title">{{item.title}}</text>
+        <view class="card-progress">
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{item.progress}}%; background: {{item.color}};"></view>
+          </view>
+          <text class="progress-text">{{item.progress}}%</text>
+        </view>
+        <text class="card-time">上次学习：{{item.lastLearnTime}}</text>
+      </view>
+      <view class="card-action">
+        <text>继续</text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{learningCases.length === 0}}">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">暂无学习记录</text>
+      <text class="empty-tip">快去案例库开始学习吧</text>
+      <view class="empty-btn" bindtap="goToCases">浏览案例</view>
+    </view>
+  </scroll-view>
+</view>

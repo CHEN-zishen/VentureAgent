@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cases/cases",
+    "pages/evaluate/evaluate",
+    "pages/profile/profile",
+    "pages/case-detail/case-detail",
+    "pages/search/search",
+    "pages/trend/trend",
+    "pages/trend-detail/trend-detail",
+    "pages/knowledge/knowledge",
+    "pages/my-cases/my-cases",
+    "pages/collections/collections",
+    "pages/history/history",
+    "pages/settings/settings",
+    "pages/help/help",
+    "pages/evaluate-history/evaluate-history"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTitleText": "创业体验官",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4a90e2",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/cases/cases",
+        "text": "案例库",
+        "iconPath": "assets/icons/cases.png",
+        "selectedIconPath": "assets/icons/cases-active.png"
+      },
+      {
+        "pagePath": "pages/evaluate/evaluate",
+        "text": "AI 评估",
+        "iconPath": "assets/icons/ai.png",
+        "selectedIconPath": "assets/icons/ai-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "cloud": true
+}

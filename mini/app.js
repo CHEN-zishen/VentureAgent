@@ -1,0 +1,615 @@
+App({
+  onLaunch: function () {
+    // 初始化云开发环境
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
+    } else {
+      wx.cloud.init({
+        env: 'your-env-id', // TODO: 替换为你的云开发环境 ID
+        traceUser: true,
+      });
+      console.log('云开发初始化成功');
+    }
+    
+    this.globalData = {};
+  },
+  
+  globalData: {
+    userInfo: null,
+    apiBaseUrl: 'https://api.business-ai.com',
+    caseCategories: [
+      { id: 1, name: '创业融资', icon: 'startup', color: '#4a90e2' },
+      { id: 2, name: '市场营销', icon: 'marketing', color: '#48b879' },
+      { id: 3, name: '运营管理', icon: 'operation', color: '#ff9900' },
+      { id: 4, name: '投资并购', icon: 'investment', color: '#ff4d4f' },
+      { id: 5, name: '战略规划', icon: 'strategy', color: '#9c27b0' },
+      { id: 6, name: '财务税务', icon: 'finance', color: '#00bcd4' }
+    ],
+    mockCases: [
+      {
+        id: 1,
+        title: '瑞幸咖啡：数字化转型之路',
+        category: '创业融资',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.8,
+        participants: 12580,
+        description: '瑞幸咖啡成立于2017年，凭借创新的数字化运营模式和社交营销策略，在短短18个月内完成从创立到美国上市的壮举，刷新了全球最快IPO记录。通过APP下单、线上支付、智能取餐等数字化手段，瑞幸成功颠覆了传统咖啡行业的运营模式。',
+        tags: ['新零售', '数字化', '咖啡行业', '社交营销'],
+        coverImage: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop',
+        emoji: '☕',
+        color: '#4a90e2',
+        source: 'https://www.luckincoffee.com',
+        sourceName: '瑞幸咖啡官网',
+        background: '瑞幸咖啡由钱治亚于2017年创立，总部位于厦门。公司以"从咖啡开始，让每一个人享受品质生活"为使命，致力于成为中国最大的连锁咖啡品牌。通过线上线下融合的新零售模式，瑞幸在成立两年内门店数量突破4000家，超越星巴克成为中国门店数量最多的咖啡连锁品牌。',
+        businessModel: '瑞幸采用"线上点单+线下取餐"的新零售模式，通过APP实现全流程数字化运营。核心收入来源于咖啡销售，同时拓展茶饮、轻食等产品线。公司通过低价策略吸引用户，利用大数据分析用户偏好，实现精准营销和个性化推荐。',
+        keyStrategies: [
+          { title: '数字化点餐系统', desc: '用户通过APP下单，支持自提和外卖两种模式，大幅提升运营效率' },
+          { title: '社交裂变营销', desc: '通过"邀请好友免费喝咖啡"等活动实现用户快速增长' },
+          { title: '低价策略', desc: '以低于行业平均价格的产品吸引价格敏感型消费者' },
+          { title: '数据驱动运营', desc: '利用大数据分析用户行为，优化产品和服务' }
+        ],
+        successFactors: ['强大的资本支持', '精准的市场定位', '高效的数字化运营', '快速的门店扩张'],
+        challenges: ['盈利压力', '品牌信任危机', '竞争加剧', '成本上升'],
+        milestones: ['2017年10月：首店开业', '2019年5月：纳斯达克上市', '2020年：经历财务造假危机', '2023年：完成债务重组'],
+        insights: '瑞幸的成功证明了数字化转型在传统行业的巨大潜力，但也警示了快速扩张背后的风险。企业需要在增长和盈利之间找到平衡。'
+      },
+      {
+        id: 2,
+        title: '小米生态链战略分析',
+        category: '战略规划',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.9,
+        participants: 8920,
+        description: '小米公司自2010年成立以来，通过"硬件+软件+互联网服务"铁人三项模式，重新定义了智能手机行业。2019年启动"手机+AIoT"双引擎战略，通过投资孵化方式构建庞大的生态链体系，成为全球最大的IoT智能硬件平台。',
+        tags: ['生态链', 'IoT', '智能硬件', '投资'],
+        coverImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
+        emoji: '📱',
+        color: '#ff9900',
+        source: 'https://www.mi.com',
+        sourceName: '小米官网',
+        background: '小米成立于2010年，由雷军等七位创始人共同创立。公司以"让每个人都能享受科技的乐趣"为使命，通过高性价比的智能手机迅速占领市场。2013年开始布局生态链，投资了大量智能硬件创业公司，构建了庞大的IoT生态系统。',
+        businessModel: '小米采用"硬件+软件+互联网服务"的商业模式。硬件产品以接近成本价销售，通过互联网服务和增值服务获取利润。生态链企业独立运营，小米提供投资、供应链和渠道支持，分享部分收益。',
+        keyStrategies: [
+          { title: '生态链投资模式', desc: '通过投资孵化智能硬件创业公司，快速拓展产品线' },
+          { title: '性价比策略', desc: '以高性价比产品吸引用户，构建用户基数' },
+          { title: '米家IoT平台', desc: '统一的智能硬件控制平台，提升用户体验' },
+          { title: '粉丝运营', desc: '通过MIUI社区和米粉节等活动增强用户粘性' }
+        ],
+        successFactors: ['精准的性价比定位', '强大的供应链管理', '优秀的用户运营', '生态协同效应'],
+        challenges: ['毛利率压力', '高端市场突破', '海外市场竞争', '生态链管理复杂度'],
+        milestones: ['2010年：公司成立', '2018年：香港上市', '2019年：启动AIoT战略', '2023年：IoT设备连接数突破6亿'],
+        insights: '小米的生态链模式展示了平台型企业的强大竞争力，但也面临如何平衡生态链企业独立性和集团战略一致性的挑战。'
+      },
+      {
+        id: 3,
+        title: '完美日记私域流量运营',
+        category: '市场营销',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.6,
+        participants: 15600,
+        description: '完美日记成立于2017年，专注于年轻一代美妆市场。通过私域流量运营和KOL营销策略，销售额在3年内突破50亿元，成为国货美妆品牌的标杆。公司成功打造了"小完子"IP，通过微信社群实现用户深度运营。',
+        tags: ['私域流量', '美妆', 'DTC', '社交电商'],
+        coverImage: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop',
+        emoji: '💄',
+        color: '#ff4d4f',
+        source: 'https://www.perfectdaily.com',
+        sourceName: '完美日记官网',
+        background: '完美日记成立于2017年，是逸仙电商旗下的美妆品牌。公司以"追求完美，记录美好"为品牌理念，致力于为年轻消费者提供高性价比的美妆产品。通过创新的营销方式，完美日记迅速成为国内美妆行业的领导者。',
+        businessModel: '采用DTC（直接面向消费者）模式，通过电商平台和私域流量直接触达用户。产品以高性价比为核心卖点，通过KOL营销和社群运营提升品牌知名度和用户粘性。',
+        keyStrategies: [
+          { title: '私域社群运营', desc: '通过微信公众号、小程序和企业微信构建私域流量池' },
+          { title: 'KOL营销策略', desc: '与大量美妆博主合作，在小红书、抖音等平台进行内容营销' },
+          { title: '产品快速迭代', desc: '根据用户反馈快速推出新品，保持市场热度' },
+          { title: '会员体系', desc: '通过积分和会员权益提升用户复购率' }
+        ],
+        successFactors: ['精准的目标客群定位', '创新的营销策略', '高效的供应链响应', '强大的数据驱动'],
+        challenges: ['品牌溢价能力不足', '产品质量争议', '线上流量成本上升', '国际市场拓展'],
+        milestones: ['2017年：品牌成立', '2019年：销售额突破30亿', '2020年：纽交所上市', '2023年：布局线下渠道'],
+        insights: '完美日记的成功证明了在数字时代，通过精准的社交媒体营销和私域流量运营，可以快速打造品牌影响力。'
+      },
+      {
+        id: 4,
+        title: '字节跳动收购案例分析',
+        category: '投资并购',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.7,
+        participants: 6380,
+        description: '字节跳动成立于2012年，凭借算法推荐技术打造了今日头条、抖音等现象级产品。通过积极的国内外并购策略，公司快速扩张全球市场，成为最具影响力的科技公司之一。从收购Musical.ly到投资Kuaishou，字节跳动展现了卓越的战略眼光。',
+        tags: ['并购', '全球化', '内容平台', 'AI'],
+        coverImage: 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=400&h=300&fit=crop',
+        emoji: '🌐',
+        color: '#9c27b0',
+        source: 'https://www.bytedance.com',
+        sourceName: '字节跳动官网',
+        background: '字节跳动成立于2012年，由张一鸣创立。公司以"激发创造，丰富生活"为使命，通过人工智能技术为用户提供个性化内容推荐。旗下产品包括今日头条、抖音、TikTok等，业务覆盖全球超过150个国家和地区。',
+        businessModel: '核心业务是内容平台，通过广告变现实现盈利。同时布局游戏、教育、电商等多个领域。并购策略是公司快速扩张的重要手段。',
+        keyStrategies: [
+          { title: '技术驱动', desc: '持续投入AI算法研发，提升内容推荐精度' },
+          { title: '全球化扩张', desc: '通过本地化运营进入海外市场' },
+          { title: '战略并购', desc: '通过收购快速获取技术、人才和市场' },
+          { title: '产品矩阵', desc: '构建多元化产品矩阵，满足不同用户需求' }
+        ],
+        successFactors: ['强大的技术实力', '敏锐的市场洞察力', '高效的执行力', '优秀的人才团队'],
+        challenges: ['海外监管压力', '竞争加剧', '商业模式复制难度', '数据安全问题'],
+        milestones: ['2012年：公司成立', '2016年：抖音上线', '2017年：收购Musical.ly', '2020年：TikTok全球下载量突破20亿'],
+        insights: '字节跳动的并购策略展示了科技公司如何通过资本手段快速实现战略目标，但也面临着复杂的监管环境和文化整合挑战。'
+      },
+      {
+        id: 5,
+        title: '海底捞服务创新模式',
+        category: '运营管理',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.5,
+        participants: 11200,
+        description: '海底捞成立于1994年，以极致的服务体验著称。通过标准化管理和员工激励制度，公司建立了独特的竞争优势，成为火锅行业的领导品牌。海底捞的服务模式被业界称为"海底捞现象"，成为服务管理的经典案例。',
+        tags: ['餐饮', '服务管理', '客户体验', '企业文化'],
+        coverImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
+        emoji: '🍲',
+        color: '#48b879',
+        source: 'https://www.haidilao.com',
+        sourceName: '海底捞官网',
+        background: '海底捞成立于1994年，由张勇在四川简阳创立。公司以"服务至上，顾客至上"为经营理念，通过极致的服务体验赢得消费者喜爱。2018年在香港上市，成为首家上市的火锅企业。',
+        businessModel: '以火锅餐饮为主业，通过服务差异化建立竞争优势。收入主要来源于菜品销售，同时通过调味品、食材供应等业务拓展收入来源。',
+        keyStrategies: [
+          { title: '极致服务体系', desc: '提供免费零食、美甲、擦鞋等增值服务，超出顾客预期' },
+          { title: '员工激励机制', desc: '给予员工充分授权，鼓励创新服务' },
+          { title: '标准化管理', desc: '建立严格的服务流程和质量标准' },
+          { title: '供应链整合', desc: '自建供应链体系，确保食材品质和成本控制' }
+        ],
+        successFactors: ['独特的服务文化', '优秀的员工管理', '强大的品牌效应', '高效的运营体系'],
+        challenges: ['服务成本上升', '标准化与个性化平衡', '食品安全风险', '竞争模仿'],
+        milestones: ['1994年：首店开业', '2018年：香港上市', '2020年：全球门店突破1000家', '2023年：拓展海外市场'],
+        insights: '海底捞证明了在同质化竞争中，通过服务创新可以建立强大的品牌护城河。但服务模式的复制和成本控制是持续挑战。'
+      },
+      {
+        id: 6,
+        title: '拼多多社交电商崛起之路',
+        category: '创业融资',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.7,
+        participants: 18900,
+        description: '拼多多成立于2015年，通过社交裂变模式在电商红海中突围。成立三年即成功上市，用户规模超越京东，成为中国第二大电商平台。拼多多的"拼团"模式彻底改变了人们的购物方式，开创了社交电商的新时代。',
+        tags: ['社交电商', '下沉市场', '拼团模式', 'C2M'],
+        coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop',
+        emoji: '🛒',
+        color: '#e040fb',
+        source: 'https://www.pinduoduo.com',
+        sourceName: '拼多多官网',
+        background: '拼多多成立于2015年，由黄峥创立。公司以"多实惠，多乐趣"为使命，通过社交电商模式快速发展。2018年在纳斯达克上市，成为史上最快上市的互联网公司之一。',
+        businessModel: '核心是"拼团"模式，用户通过社交分享获得优惠价格。平台连接消费者和商家，通过收取佣金和广告费用盈利。',
+        keyStrategies: [
+          { title: '拼团社交裂变', desc: '用户邀请好友拼团获得更低价格，实现病毒式传播' },
+          { title: '下沉市场策略', desc: '瞄准三四线城市和农村市场，填补市场空白' },
+          { title: 'C2M模式', desc: '连接消费者和制造商，实现定制化生产' },
+          { title: '补贴策略', desc: '通过价格补贴吸引用户，快速占领市场' }
+        ],
+        successFactors: ['创新的商业模式', '精准的市场定位', '强大的执行力', '资本的支持'],
+        challenges: ['商品质量争议', '用户留存率', '盈利能力', '监管合规'],
+        milestones: ['2015年：公司成立', '2018年：纳斯达克上市', '2020年：用户突破7亿', '2023年：进军海外市场'],
+        insights: '拼多多证明了在成熟市场中仍有创新空间，通过差异化定位和商业模式创新可以快速崛起。'
+      },
+      {
+        id: 7,
+        title: '华为供应链管理战略',
+        category: '运营管理',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.8,
+        participants: 9560,
+        description: '华为作为全球领先的ICT基础设施和智能终端提供商，构建了世界领先的供应链管理体系。面对外部挑战，华为展现了强大的供应链韧性和风险应对能力，成为全球供应链管理的典范。',
+        tags: ['供应链', '全球化', '科技企业', '风险管理'],
+        coverImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
+        emoji: '📡',
+        color: '#cf0a2c',
+        source: 'https://www.huawei.com',
+        sourceName: '华为官网',
+        background: '华为成立于1987年，是全球领先的信息与通信技术解决方案提供商。公司业务涵盖电信设备、智能手机、云计算等多个领域，在全球170多个国家和地区开展业务。',
+        businessModel: '以B2B业务为主，为运营商和企业客户提供通信设备和解决方案。消费者业务通过智能手机等终端产品直接面向消费者。',
+        keyStrategies: [
+          { title: '全球化布局', desc: '在全球范围内建立供应链网络，降低单一区域风险' },
+          { title: '供应商管理', desc: '建立严格的供应商评估体系，确保供应链稳定' },
+          { title: '技术自主创新', desc: '加大研发投入，减少对外部技术依赖' },
+          { title: '风险储备', desc: '建立战略物资储备，应对突发风险' }
+        ],
+        successFactors: ['强大的技术实力', '全球化视野', '优秀的管理团队', '企业文化凝聚力'],
+        challenges: ['外部制裁压力', '技术封锁', '全球政治环境', '人才竞争'],
+        milestones: ['1987年：公司成立', '2019年：成为全球最大电信设备商', '2020年：应对外部制裁', '2023年：加速自主创新'],
+        insights: '华为的供应链战略展示了全球化企业在复杂国际环境下的生存智慧，技术自主和风险分散是关键。'
+      },
+      {
+        id: 8,
+        title: '元气森林品牌营销策略',
+        category: '市场营销',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.5,
+        participants: 13200,
+        description: '元气森林成立于2016年，通过精准定位和营销创新打造爆款产品。以"无糖"为核心卖点，成功切入健康饮品市场，成为新消费品牌的标杆。元气森林的营销策略被称为"元气森林模式"，成为行业研究的经典案例。',
+        tags: ['新消费', '健康饮品', '品牌营销', '产品创新'],
+        coverImage: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=300&fit=crop',
+        emoji: '🍃',
+        color: '#48b879',
+        source: 'https://www.yuanqisenlin.com',
+        sourceName: '元气森林官网',
+        background: '元气森林成立于2016年，是一家专注于健康饮品的创新型企业。公司以"让世界爱上中国味"为使命，通过产品创新和营销创新快速崛起。',
+        businessModel: '以健康饮品为主业，通过电商和线下渠道销售。产品定价高于传统饮料，定位中高端市场。',
+        keyStrategies: [
+          { title: '健康定位', desc: '主打"无糖"概念，迎合健康消费趋势' },
+          { title: '社交媒体营销', desc: '在小红书、抖音等平台进行密集种草' },
+          { title: '包装设计', desc: '采用日系风格包装，吸引年轻消费者' },
+          { title: '渠道创新', desc: '重点布局便利店渠道，贴近目标消费场景' }
+        ],
+        successFactors: ['精准的市场定位', '产品力支撑', '创新的营销方式', '快速的市场响应'],
+        challenges: ['竞争加剧', '产品同质化', '供应链管理', '品牌溢价维护'],
+        milestones: ['2016年：公司成立', '2020年：销售额突破30亿', '2021年：完成D轮融资', '2023年：拓展海外市场'],
+        insights: '元气森林证明了在新消费时代，通过精准定位和营销创新可以快速打造品牌。'
+      },
+      {
+        id: 9,
+        title: '蚂蚁金服金融科技布局',
+        category: '财务税务',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.9,
+        participants: 7840,
+        description: '蚂蚁金服作为全球领先的金融科技公司，通过技术创新重塑金融服务生态。从支付宝到余额宝，从花呗到芝麻信用，蚂蚁金服构建了覆盖支付、理财、信贷、保险等多个领域的金融服务体系。',
+        tags: ['金融科技', '支付', '普惠金融', '数字金融'],
+        coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+        emoji: '🐜',
+        color: '#1677ff',
+        source: 'https://www.antgroup.com',
+        sourceName: '蚂蚁集团官网',
+        background: '蚂蚁金服成立于2014年，前身是支付宝。作为阿里巴巴集团的金融科技板块，蚂蚁金服致力于通过技术创新推动普惠金融发展。旗下拥有支付宝、余额宝、花呗、芝麻信用等知名品牌。',
+        businessModel: '以支付为基础，通过金融科技服务实现多元化盈利。收入来源包括支付手续费、信贷利息、理财服务费用等。',
+        keyStrategies: [
+          { title: '支付生态', desc: '构建覆盖线上线下的支付网络' },
+          { title: '大数据风控', desc: '利用大数据和AI技术评估信用风险' },
+          { title: '普惠金融', desc: '为小微企业和个人提供便捷的金融服务' },
+          { title: '技术输出', desc: '向金融机构输出金融科技能力' }
+        ],
+        successFactors: ['强大的技术能力', '庞大的用户基础', '创新的产品设计', '生态协同效应'],
+        challenges: ['监管压力', '合规要求', '数据安全', '国际化挑战'],
+        milestones: ['2004年：支付宝成立', '2013年：余额宝上线', '2014年：蚂蚁金服成立', '2020年：暂缓上市'],
+        insights: '蚂蚁金服展示了科技如何赋能金融，但也面临着金融创新与监管之间的平衡挑战。'
+      },
+      {
+        id: 10,
+        title: '美团本地生活服务帝国',
+        category: '战略规划',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.6,
+        participants: 14300,
+        description: '美团从团购业务起步，通过战略拓展构建了本地生活服务的超级平台。从外卖到酒旅，从到店服务到出行，美团打造了覆盖本地生活全场景的服务生态，成为中国本地生活服务领域的绝对领导者。',
+        tags: ['本地生活', 'O2O', '平台经济', '外卖'],
+        coverImage: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=400&h=300&fit=crop',
+        emoji: '🥡',
+        color: '#ffc107',
+        source: 'https://www.meituan.com',
+        sourceName: '美团官网',
+        background: '美团成立于2010年，最初以团购业务为主。通过持续的业务拓展和战略投资，美团逐渐构建了覆盖本地生活全场景的服务平台。2018年在香港上市。',
+        businessModel: '平台连接商家和消费者，通过收取佣金和广告费用盈利。核心业务包括外卖、到店餐饮、酒旅、出行等。',
+        keyStrategies: [
+          { title: '外卖配送网络', desc: '建立覆盖全国的即时配送体系' },
+          { title: '多品类扩张', desc: '从餐饮拓展到酒旅、零售、出行等多个领域' },
+          { title: '商家服务', desc: '为商家提供营销、配送、金融等一站式服务' },
+          { title: '会员体系', desc: '通过美团会员提升用户粘性和复购率' }
+        ],
+        successFactors: ['强大的线下执行力', '高效的配送网络', '多元化业务布局', '数据驱动运营'],
+        challenges: ['外卖竞争加剧', '盈利压力', '骑手权益', '监管合规'],
+        milestones: ['2010年：公司成立', '2015年：合并大众点评', '2018年：香港上市', '2023年：日订单突破7000万'],
+        insights: '美团展示了平台型企业如何通过持续扩张构建竞争壁垒，但也面临着业务多元化带来的管理挑战。'
+      },
+      {
+        id: 11,
+        title: '蔚来汽车用户运营模式',
+        category: '运营管理',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.7,
+        participants: 8720,
+        description: '蔚来汽车作为新能源汽车行业的创新者，通过独特的用户运营模式建立了强大的品牌忠诚度。从NIO House到用户社区，蔚来打造了以用户为中心的服务体系，成为新能源汽车行业的标杆。',
+        tags: ['新能源汽车', '用户运营', '社群', '服务体验'],
+        coverImage: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop',
+        emoji: '🚗',
+        color: '#10b981',
+        source: 'https://www.nio.cn',
+        sourceName: '蔚来官网',
+        background: '蔚来汽车成立于2014年，是一家专注于高端智能电动汽车的企业。公司以"打造用户型企业"为理念，通过创新的产品和服务体验赢得用户喜爱。',
+        businessModel: '以高端智能电动汽车销售为主，同时提供电池租赁、充电服务、用户社区等增值服务。',
+        keyStrategies: [
+          { title: '用户社区运营', desc: '建立活跃的用户社群，增强用户粘性' },
+          { title: 'NIO House体验', desc: '打造集展示、体验、社交于一体的用户中心' },
+          { title: '电池租用服务', desc: '推出BaaS模式，降低购车门槛' },
+          { title: '用户积分体系', desc: '通过积分激励用户参与和分享' }
+        ],
+        successFactors: ['优秀的产品设计', '创新的服务模式', '强大的用户运营', '品牌认同感'],
+        challenges: ['盈利压力', '产能挑战', '资金需求', '竞争加剧'],
+        milestones: ['2014年：公司成立', '2018年：纽交所上市', '2020年：推出BaaS模式', '2023年：销量突破100万辆'],
+        insights: '蔚来证明了在新能源汽车行业，通过用户运营可以建立强大的品牌护城河。'
+      },
+      {
+        id: 12,
+        title: 'B站内容社区运营策略',
+        category: '市场营销',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.4,
+        participants: 16500,
+        description: 'B站从二次元社区起步，通过社区运营打造了年轻人文化阵地。独特的弹幕文化、活跃的UP主生态和分层会员体系，使B站成为中国最具影响力的年轻人社区平台之一。',
+        tags: ['内容社区', 'Z世代', '二次元', '视频平台'],
+        coverImage: 'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=400&h=300&fit=crop',
+        emoji: '📺',
+        color: '#00a1d6',
+        source: 'https://www.bilibili.com',
+        sourceName: 'B站官网',
+        background: 'B站成立于2009年，最初是一个二次元爱好者社区。通过持续的内容生态建设，B站逐渐发展成为综合性视频平台，拥有庞大的年轻用户群体。',
+        businessModel: '以广告和会员订阅为主要收入来源，同时通过游戏、直播、电商等业务多元化变现。',
+        keyStrategies: [
+          { title: '弹幕文化', desc: '打造独特的弹幕互动体验，增强用户参与感' },
+          { title: 'UP主生态', desc: '建立完善的创作者激励体系' },
+          { title: '会员体系', desc: '通过大会员服务提供增值内容' },
+          { title: '内容多元化', desc: '从二次元拓展到科技、生活、学习等多个领域' }
+        ],
+        successFactors: ['独特的社区文化', '活跃的用户参与', '优质的内容生态', '精准的用户定位'],
+        challenges: ['内容监管', '盈利模式', '用户增长瓶颈', '竞争加剧'],
+        milestones: ['2009年：网站上线', '2018年：纳斯达克上市', '2020年：月活突破2亿', '2023年：拓展短视频业务'],
+        insights: 'B站展示了垂直社区如何通过文化建设实现用户增长和商业化。'
+      },
+      {
+        id: 13,
+        title: '阿里巴巴菜鸟网络物流布局',
+        category: '战略规划',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.8,
+        participants: 6980,
+        description: '菜鸟网络作为阿里巴巴集团的物流基础设施平台，通过技术创新和网络建设推动物流行业的数字化升级。从智能仓储到末端配送，从国内物流到国际物流，菜鸟构建了覆盖全球的智能物流网络。',
+        tags: ['物流', '智能仓储', '供应链', '电商物流'],
+        coverImage: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&h=300&fit=crop',
+        emoji: '📦',
+        color: '#ff6a00',
+        source: 'https://www.cainiao.com',
+        sourceName: '菜鸟网络官网',
+        background: '菜鸟网络成立于2013年，是阿里巴巴集团旗下的智慧物流平台。公司致力于通过技术创新提升物流效率，推动物流行业数字化升级。',
+        businessModel: '通过物流网络基础设施建设和技术服务获取收入，包括仓储服务、配送服务、物流科技服务等。',
+        keyStrategies: [
+          { title: '智能仓储系统', desc: '利用自动化设备和AI技术提升仓储效率' },
+          { title: '数据算法优化', desc: '通过大数据优化物流路径和资源配置' },
+          { title: '末端配送网络', desc: '构建覆盖城乡的末端配送体系' },
+          { title: '国际物流布局', desc: '拓展跨境物流服务能力' }
+        ],
+        successFactors: ['强大的技术能力', '生态协同效应', '规模化运营', '持续创新'],
+        challenges: ['物流成本', '末端配送压力', '行业竞争', '国际物流复杂性'],
+        milestones: ['2013年：公司成立', '2017年：推出菜鸟裹裹', '2020年：物流时效大幅提升', '2023年：全球智能物流骨干网建成'],
+        insights: '菜鸟网络展示了科技如何赋能传统物流行业，通过数字化提升效率和服务质量。'
+      },
+      {
+        id: 14,
+        title: '泡泡玛特盲盒经济模式',
+        category: '创业融资',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.5,
+        participants: 12100,
+        description: '泡泡玛特通过盲盒模式引爆潮流玩具市场，成为中国潮玩第一股。从IP孵化到渠道建设，泡泡玛特构建了完整的潮玩产业链，创造了独特的"盲盒经济"现象。',
+        tags: ['潮玩', 'IP运营', '新零售', '收藏经济'],
+        coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
+        emoji: '🧸',
+        color: '#ff69b4',
+        source: 'https://www.popmart.com',
+        sourceName: '泡泡玛特官网',
+        background: '泡泡玛特成立于2010年，最初是一家潮流玩具零售商。通过IP孵化和盲盒模式，泡泡玛特迅速崛起，2020年在香港上市，成为"中国潮玩第一股"。',
+        businessModel: '以潮流玩具设计、生产和销售为主，通过线下门店、线上电商和自动贩卖机等多渠道销售。',
+        keyStrategies: [
+          { title: '盲盒营销模式', desc: '通过随机抽取增加购买趣味性和收藏价值' },
+          { title: 'IP孵化运营', desc: '打造Molly、Dimoo等知名IP' },
+          { title: '稀缺性营造', desc: '限量款和隐藏款刺激收藏欲望' },
+          { title: '线下体验', desc: '打造沉浸式购物体验' }
+        ],
+        successFactors: ['强大的IP运营', '创新的营销模式', '精准的用户定位', '完善的渠道布局'],
+        challenges: ['IP生命周期', '产品同质化', '消费热度波动', '国际化挑战'],
+        milestones: ['2010年：公司成立', '2016年：推出盲盒模式', '2020年：香港上市', '2023年：全球门店突破300家'],
+        insights: '泡泡玛特证明了通过IP运营和营销创新可以创造新的消费品类和市场需求。'
+      },
+      {
+        id: 15,
+        title: '京东物流一体化战略',
+        category: '运营管理',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.6,
+        participants: 10800,
+        description: '京东通过自建物流体系建立了电商行业的竞争壁垒。从"211限时达"到"分钟级配送"，京东物流不断提升配送时效和服务质量，成为电商物流的标杆。',
+        tags: ['电商物流', '仓储', '配送', '供应链'],
+        coverImage: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop',
+        emoji: '🚀',
+        color: '#e71837',
+        source: 'https://www.jd.com',
+        sourceName: '京东官网',
+        background: '京东成立于1998年，最初是一家电子产品零售商。2007年开始自建物流体系，通过持续投入打造了行业领先的物流能力。京东物流于2021年独立运营并上市。',
+        businessModel: '以电商零售为主，物流作为核心竞争力支撑零售业务。物流业务通过向第三方提供服务实现额外收入。',
+        keyStrategies: [
+          { title: '仓配一体化', desc: '建立覆盖全国的仓储网络，实现商品就近存储' },
+          { title: '211限时达', desc: '承诺上午下单下午送达，提升用户体验' },
+          { title: '智能仓储', desc: '利用自动化设备提升仓储效率' },
+          { title: '最后一公里', desc: '通过自提点、配送站等方式优化末端配送' }
+        ],
+        successFactors: ['强大的物流基础设施', '高效的运营管理', '优质的服务体验', '品牌信任度'],
+        challenges: ['物流成本高', '盈利压力', '外部竞争', '劳动力成本上升'],
+        milestones: ['1998年：公司成立', '2007年：开始自建物流', '2021年：京东物流上市', '2023年：分钟级配送覆盖全国'],
+        insights: '京东证明了在电商行业，物流能力可以成为核心竞争优势。'
+      },
+      {
+        id: 16,
+        title: '腾讯投资生态布局',
+        category: '投资并购',
+        difficulty: 'hard',
+        difficultyText: '困难',
+        rating: 4.7,
+        participants: 5640,
+        description: '腾讯通过战略投资构建了庞大的互联网生态帝国。从社交到游戏，从电商到金融，腾讯的投资版图覆盖了互联网行业的各个领域。通过投资而非直接竞争，腾讯实现了生态协同和价值最大化。',
+        tags: ['战略投资', '生态布局', '互联网', '投资策略'],
+        coverImage: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=300&fit=crop',
+        emoji: '🐧',
+        color: '#07c160',
+        source: 'https://www.tencent.com',
+        sourceName: '腾讯官网',
+        background: '腾讯成立于1998年，是中国领先的互联网科技公司。通过QQ、微信等社交产品积累了庞大的用户基础，然后通过战略投资拓展业务边界。',
+        businessModel: '以社交和游戏为核心，通过投资布局多个领域。收入主要来源于游戏、社交广告和金融科技。',
+        keyStrategies: [
+          { title: '战略投资', desc: '通过投资获取技术、人才和市场准入' },
+          { title: '生态协同', desc: '促进被投企业与腾讯产品的协同' },
+          { title: '财务投资', desc: '通过股权投资获取财务回报' },
+          { title: '产业链整合', desc: '围绕核心业务构建产业链生态' }
+        ],
+        successFactors: ['强大的现金流', '敏锐的投资眼光', '生态协同效应', '优秀的投后管理'],
+        challenges: ['监管压力', '反垄断审查', '投资组合管理', '被投企业独立性'],
+        milestones: ['1998年：公司成立', '2004年：香港上市', '2011年：投资京东', '2023年：投资组合价值突破万亿'],
+        insights: '腾讯的投资战略展示了如何通过资本手段实现业务扩张和生态构建。'
+      },
+      {
+        id: 17,
+        title: '农夫山泉品牌价值塑造',
+        category: '市场营销',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.4,
+        participants: 11500,
+        description: '农夫山泉通过情感营销和品质塑造打造了国民品牌。从"大自然的搬运工"到"有点甜"，农夫山泉的品牌故事深入人心，成为中国包装饮用水行业的领导者。',
+        tags: ['快消品', '品牌营销', '饮用水', '情感营销'],
+        coverImage: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&h=300&fit=crop',
+        emoji: '💧',
+        color: '#22c55e',
+        source: 'https://www.nongfuspring.com',
+        sourceName: '农夫山泉官网',
+        background: '农夫山泉成立于1996年，是中国领先的瓶装水和饮料企业。通过独特的品牌定位和营销方式，农夫山泉从区域品牌成长为全国知名品牌。',
+        businessModel: '以包装饮用水为主，同时生产饮料、茶饮品等产品。通过经销商网络覆盖全国市场。',
+        keyStrategies: [
+          { title: '天然水源定位', desc: '强调水源地的天然品质' },
+          { title: '情感营销', desc: '通过广告传递健康、自然的品牌理念' },
+          { title: '包装设计', desc: '采用独特的瓶型设计，提升产品辨识度' },
+          { title: '渠道深度覆盖', desc: '建立广泛的经销商网络' }
+        ],
+        successFactors: ['清晰的品牌定位', '优秀的营销能力', '产品品质支撑', '渠道执行力'],
+        challenges: ['水源地保护', '包装环保', '竞争加剧', '成本上升'],
+        milestones: ['1996年：公司成立', '2000年：推出"农夫山泉有点甜"', '2020年：香港上市', '2023年：成为全球最大瓶装水企业'],
+        insights: '农夫山泉证明了在快消品行业，通过情感营销可以建立强大的品牌价值。'
+      },
+      {
+        id: 18,
+        title: '滴滴出行共享经济模式',
+        category: '创业融资',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.5,
+        participants: 9320,
+        description: '滴滴出行通过共享经济模式改变了人们的出行方式。从出租车叫车到专车、快车、顺风车，滴滴构建了覆盖多种出行场景的移动出行平台，成为中国最大的出行服务提供商。',
+        tags: ['共享经济', '出行', '平台', '网约车'],
+        coverImage: 'https://images.unsplash.com/photo-1449965408869-euj2e94cce3f?w=400&h=300&fit=crop',
+        emoji: '🚕',
+        color: '#ffa500',
+        source: 'https://www.didiglobal.com',
+        sourceName: '滴滴出行官网',
+        background: '滴滴出行成立于2012年，最初是一个出租车叫车软件。通过持续的业务拓展和并购整合，滴滴成为覆盖多种出行方式的综合出行平台。',
+        businessModel: '连接乘客和司机，通过收取服务费盈利。业务包括出租车、快车、专车、顺风车、代驾等。',
+        keyStrategies: [
+          { title: '平台双边效应', desc: '通过补贴吸引司机和乘客，形成网络效应' },
+          { title: '多元化服务', desc: '从出租车拓展到多种出行方式' },
+          { title: '数据驱动', desc: '利用大数据优化派单和定价' },
+          { title: '安全体系', desc: '建立完善的安全保障机制' }
+        ],
+        successFactors: ['先发优势', '网络效应', '资本支持', '运营能力'],
+        challenges: ['安全问题', '监管压力', '盈利模式', '司机权益'],
+        milestones: ['2012年：公司成立', '2015年：合并快的打车', '2021年：纽交所上市', '2023年：探索国际化'],
+        insights: '滴滴证明了共享经济模式在出行领域的可行性，但也面临着监管和社会责任的挑战。'
+      },
+      {
+        id: 19,
+        title: '格力电器渠道变革之路',
+        category: '战略规划',
+        difficulty: 'medium',
+        difficultyText: '中等',
+        rating: 4.6,
+        participants: 8150,
+        description: '格力电器作为中国家电行业的领导者，通过渠道变革应对市场变化。从传统经销商模式到新零售转型，格力不断调整渠道策略，保持市场竞争力。',
+        tags: ['家电', '渠道', '新零售', '传统企业转型'],
+        coverImage: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop',
+        emoji: '❄️',
+        color: '#dc2626',
+        source: 'https://www.gree.com',
+        sourceName: '格力官网',
+        background: '格力电器成立于1991年，是全球最大的空调制造商。通过"格力模式"的经销商体系，格力在家电行业建立了强大的渠道优势。',
+        businessModel: '以空调为主业，同时生产冰箱、洗衣机、小家电等产品。通过经销商网络和线上渠道销售。',
+        keyStrategies: [
+          { title: '经销商体系', desc: '建立紧密合作的经销商网络' },
+          { title: '专卖店模式', desc: '开设品牌专卖店提升品牌形象' },
+          { title: '线上线下融合', desc: '探索新零售模式' },
+          { title: '服务网络', desc: '建立完善的售后服务体系' }
+        ],
+        successFactors: ['强大的品牌力', '优秀的渠道管理', '产品质量', '技术创新'],
+        challenges: ['渠道变革', '行业下行', '多元化挑战', '国际化'],
+        milestones: ['1991年：公司成立', '2006年：成为全球最大空调企业', '2020年：渠道变革', '2023年：推进国际化'],
+        insights: '格力展示了传统制造企业如何通过渠道创新保持竞争力。'
+      },
+      {
+        id: 20,
+        title: '快手直播电商崛起',
+        category: '市场营销',
+        difficulty: 'easy',
+        difficultyText: '简单',
+        rating: 4.5,
+        participants: 14800,
+        description: '快手通过直播电商实现商业变现突破。从短视频社区到直播带货，快手打造了独特的"老铁经济"生态，成为直播电商领域的领导者之一。',
+        tags: ['直播电商', '短视频', '内容变现', '社交电商'],
+        coverImage: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400&h=300&fit=crop',
+        emoji: '🎬',
+        color: '#fe2c55',
+        source: 'https://www.kuaishou.com',
+        sourceName: '快手官网',
+        background: '快手成立于2011年，最初是一个GIF动图工具。通过转型短视频社交平台，快手积累了庞大的用户基础，并通过直播电商实现商业化突破。',
+        businessModel: '以短视频和直播为核心，通过直播带货、广告和游戏实现变现。',
+        keyStrategies: [
+          { title: '直播带货', desc: '通过主播直播销售商品' },
+          { title: '老铁文化', desc: '强调主播与粉丝的情感连接' },
+          { title: '私域流量', desc: '通过粉丝群和关注建立私域流量' },
+          { title: '供应链合作', desc: '与品牌商和供应商建立合作' }
+        ],
+        successFactors: ['下沉市场渗透', '真实的内容生态', '强大的直播能力', '私域流量运营'],
+        challenges: ['内容质量', '合规问题', '竞争加剧', '盈利压力'],
+        milestones: ['2011年：公司成立', '2016年：推出直播功能', '2021年：香港上市', '2023年：直播电商GMV突破万亿'],
+        insights: '快手证明了通过短视频和直播可以实现强大的商业变现能力。'
+      }
+    ]
+  },
+
+  onLaunch() {
+    const token = wx.getStorageSync('token');
+    if (!token) {
+      wx.setStorageSync('token', 'mock_token_' + Date.now());
+    }
+  },
+
+  getUserInfo() {
+    return new Promise((resolve, reject) => {
+      if (this.globalData.userInfo) {
+        resolve(this.globalData.userInfo);
+      } else {
+        wx.getUserProfile({
+          desc: '用于完善用户资料',
+          success: (res) => {
+            this.globalData.userInfo = res.userInfo;
+            resolve(res.userInfo);
+          },
+          fail: reject
+        });
+      }
+    });
+  }
+});

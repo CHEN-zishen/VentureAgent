@@ -1,0 +1,147 @@
+<view class="container">
+  <view class="trend-header">
+    <view class="trend-top">
+      <view class="trend-icon" style="background: {{trendData.color}}">{{trendData.icon}}</view>
+      <view class="trend-meta">
+        <text class="trend-industry">{{trendData.industry}}</text>
+        <text class="trend-time">{{trendData.time}}</text>
+      </view>
+      <view class="trend-tag" style="background: {{trendData.trend === 'hot' ? '#ffebee' : trendData.trend === 'up' ? '#e8f5e9' : '#e3f2fd'}};">
+        <text style="color: {{trendData.trend === 'hot' ? '#f44336' : trendData.trend === 'up' ? '#4caf50' : '#2196f3'}};">{{trendData.trendText}}</text>
+      </view>
+    </view>
+    
+    <text class="trend-title">{{trendData.title}}</text>
+    
+    <view class="trend-score">
+      <view class="score-circle">
+        <text class="score-value">{{trendData.investors}}</text>
+      </view>
+      <text class="score-label">投资者关注度</text>
+    </view>
+  </view>
+
+  <view class="trend-content">
+    <view class="section">
+      <text class="section-title">📋 趋势概述</text>
+      <view class="content-card">
+        <text class="content-text">{{trendData.summary}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📊 核心数据</text>
+      <view class="data-card">
+        <view class="data-main">
+          <text class="data-value">{{trendData.data.value}}</text>
+          <text class="data-label">{{trendData.data.label}}</text>
+        </view>
+        <view class="data-change" style="color: {{trendData.change > 0 ? '#4caf50' : '#f44336'}};">
+          <text class="change-icon">{{trendData.change > 0 ? '↑' : '↓'}}</text>
+          <text class="change-value">{{Math.abs(trendData.change)}}%</text>
+          <text class="change-label">较上期</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🔥 为什么值得关注</text>
+      <view class="content-card">
+        <view class="reason-list">
+          <view class="reason-item" wx:for="{{trendData.reasons}}" wx:key="index">
+            <text class="reason-number">{{index + 1}}</text>
+            <view class="reason-content">
+              <text class="reason-title">{{item.title}}</text>
+              <text class="reason-desc">{{item.desc}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📈 市场前景</text>
+      <view class="prospect-card">
+        <view class="prospect-item">
+          <text class="prospect-icon">🎯</text>
+          <view class="prospect-info">
+            <text class="prospect-value">{{trendData.forecast.marketSize}}</text>
+            <text class="prospect-label">预计市场规模</text>
+          </view>
+        </view>
+        <view class="prospect-item">
+          <text class="prospect-icon">📈</text>
+          <view class="prospect-info">
+            <text class="prospect-value">{{trendData.forecast.growthRate}}</text>
+            <text class="prospect-label">年复合增长率</text>
+          </view>
+        </view>
+        <view class="prospect-item">
+          <text class="prospect-icon">⏰</text>
+          <view class="prospect-info">
+            <text class="prospect-value">{{trendData.forecast.timeframe}}</text>
+            <text class="prospect-label">爆发期预期</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🏢 代表企业</text>
+      <view class="company-list">
+        <view class="company-card" wx:for="{{trendData.companies}}" wx:key="name">
+          <view class="company-icon">{{item.icon}}</view>
+          <view class="company-info">
+            <text class="company-name">{{item.name}}</text>
+            <text class="company-desc">{{item.desc}}</text>
+          </view>
+          <view class="company-status {{item.status}}">
+            <text>{{item.status === 'leader' ? '行业龙头' : item.status === 'growing' ? '快速成长' : '潜力新星'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">📷 相关图片</text>
+      <view class="image-grid">
+        <image class="trend-image" wx:for="{{trendData.images}}" wx:key="index" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-src="{{item}}"></image>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🏷️ 关键词标签</text>
+      <view class="tag-list">
+        <text class="tag-item" wx:for="{{trendData.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">🔗 参考来源</text>
+      <view class="source-card" bindtap="copySource" data-url="{{trendData.sourceUrl}}">
+        <view class="source-info">
+          <text class="source-icon">🌐</text>
+          <text class="source-text">{{trendData.sourceName}}</text>
+        </view>
+        <text class="source-arrow">→</text>
+      </view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bar-btn" bindtap="toggleCollect">
+      <text class="bar-icon">{{isCollected ? '❤️' : '🤍'}}</text>
+      <text class="bar-text">{{isCollected ? '已收藏' : '收藏'}}</text>
+    </view>
+    <view class="bar-btn primary" bindtap="goToEvaluate">
+      <text class="bar-icon">🤖</text>
+      <text class="bar-text">AI评估</text>
+    </view>
+    <view class="bar-btn" bindtap="shareTrend">
+      <text class="bar-icon">📤</text>
+      <text class="bar-text">分享</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,792 @@
+[
+  {
+    "title": "AI 大模型正在重塑企业服务市场格局",
+    "industry": "科技",
+    "icon": "🤖",
+    "color": "#4a90e2",
+    "time": "2 小时前",
+    "trend": "hot",
+    "trendText": "🔥 热门",
+    "summary": "随着 ChatGPT、GPT-4、Claude 等大语言模型的爆发式发展，企业服务市场正在经历前所未有的变革。从智能客服到自动化办公，从数据分析到决策支持，AI 正在渗透到企业服务的各个环节。",
+    "data": {
+      "value": "380 亿",
+      "label": "市场规模 (美元)"
+    },
+    "change": 156,
+    "investors": "高",
+    "tags": ["人工智能", "企业服务", "大模型", "数字化转型"],
+    "sourceUrl": "https://www.openai.com",
+    "sourceName": "OpenAI 官网",
+    "reasons": [
+      {
+        "title": "技术突破带来效率革命",
+        "desc": "大语言模型在自然语言理解、代码生成、内容创作等领域展现出超越人类的能力，企业可以大幅降低运营成本"
+      },
+      {
+        "title": "应用场景持续拓展",
+        "desc": "从客服、营销到研发、财务，AI 正在渗透到企业运营的各个环节，创造新的商业模式"
+      },
+      {
+        "title": "资本疯狂涌入",
+        "desc": "全球 VC 对 AI 领域的投资持续攀升，头部 AI 公司估值屡创新高"
+      },
+      {
+        "title": "政策支持力度加大",
+        "desc": "各国政府纷纷出台 AI 发展战略，提供资金和政策支持"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2027 年，全球 AI 企业服务市场规模将超过 500 亿美元",
+      "growthRate": "年复合增长率超过 40%",
+      "timeframe": "2024-2027"
+    },
+    "companies": [
+      {
+        "icon": "🤖",
+        "name": "OpenAI",
+        "desc": "ChatGPT 的开发者，全球 AI 领域的领头羊",
+        "status": "leader"
+      },
+      {
+        "icon": "💬",
+        "name": "Anthropic",
+        "desc": "Claude 系列模型的创造者，专注于 AI 安全",
+        "status": "growing"
+      },
+      {
+        "icon": "🔍",
+        "name": "Perplexity AI",
+        "desc": "AI 搜索引擎，正在改变信息获取方式",
+        "status": "growing"
+      },
+      {
+        "icon": "💼",
+        "name": "Jasper",
+        "desc": "AI 营销内容生成平台",
+        "status": "growing"
+      },
+      {
+        "icon": "📊",
+        "name": "C3.ai",
+        "desc": "企业级 AI 应用平台",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800",
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800"
+    ]
+  },
+  {
+    "title": "新能源储能产业迎来爆发式增长",
+    "industry": "能源",
+    "icon": "🔋",
+    "color": "#2ecc71",
+    "time": "5 小时前",
+    "trend": "hot",
+    "trendText": "🔥 热门",
+    "summary": "随着全球碳中和目标的推进，储能产业正在成为新的投资热点。从锂电池到氢能，从家庭储能到电网级储能，整个产业链都在加速发展。",
+    "data": {
+      "value": "1200 亿",
+      "label": "市场规模 (美元)"
+    },
+    "change": 210,
+    "investors": "极高",
+    "tags": ["新能源", "储能", "碳中和", "清洁能源"],
+    "sourceUrl": "https://www.tesla.com",
+    "sourceName": "Tesla 官网",
+    "reasons": [
+      {
+        "title": "政策驱动",
+        "desc": "各国碳中和目标推动清洁能源发展，储能成为刚需"
+      },
+      {
+        "title": "技术进步",
+        "desc": "锂电池成本持续下降，储能效率大幅提升"
+      },
+      {
+        "title": "市场需求爆发",
+        "desc": "家庭、工商业、电网侧储能需求全面爆发"
+      },
+      {
+        "title": "商业模式成熟",
+        "desc": "储能电站、共享储能等商业模式逐渐成熟"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2030 年，全球储能市场规模将超过 5000 亿美元",
+      "growthRate": "年复合增长率超过 50%",
+      "timeframe": "2024-2030"
+    },
+    "companies": [
+      {
+        "icon": "⚡",
+        "name": "Tesla",
+        "desc": "Powerwall 和 Megapack 储能系统领导者",
+        "status": "leader"
+      },
+      {
+        "icon": "🔋",
+        "name": "宁德时代",
+        "desc": "全球最大动力电池和储能电池供应商",
+        "status": "leader"
+      },
+      {
+        "icon": "☀️",
+        "name": "阳光电源",
+        "desc": "光伏逆变器和储能系统解决方案",
+        "status": "growing"
+      },
+      {
+        "icon": "💨",
+        "name": "Plug Power",
+        "desc": "氢燃料电池和氢能解决方案",
+        "status": "growing"
+      },
+      {
+        "icon": "🏠",
+        "name": "Sonnen",
+        "desc": "德国家庭储能系统领导者",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800",
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
+      "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800"
+    ]
+  },
+  {
+    "title": "银发经济：老龄化社会的商业机遇",
+    "industry": "消费",
+    "icon": "👴",
+    "color": "#e74c3c",
+    "time": "1 天前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "中国正在快速进入老龄化社会，60 岁以上人口已超 2.8 亿。银发经济涵盖医疗健康、养老服务、智能辅具、老年旅游等多个领域，正在成为新的经济增长点。",
+    "data": {
+      "value": "7 万亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 85,
+    "investors": "中高",
+    "tags": ["老龄化", "银发经济", "健康养老", "消费升级"],
+    "sourceUrl": "https://www.gov.cn",
+    "sourceName": "中国政府网",
+    "reasons": [
+      {
+        "title": "人口结构变化",
+        "desc": "老龄化加速，老年人口规模持续扩大"
+      },
+      {
+        "title": "消费能力提升",
+        "desc": "新一代老年人消费观念转变，消费能力增强"
+      },
+      {
+        "title": "政策扶持",
+        "desc": "国家出台多项政策支持养老产业发展"
+      },
+      {
+        "title": "技术创新",
+        "desc": "智能穿戴、远程医疗等技术提升养老服务质量"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2035 年，银发经济规模将突破 30 万亿元",
+      "growthRate": "年复合增长率超过 15%",
+      "timeframe": "2024-2035"
+    },
+    "companies": [
+      {
+        "icon": "🏥",
+        "name": "泰康保险",
+        "desc": "保险 + 养老社区模式创新者",
+        "status": "leader"
+      },
+      {
+        "icon": "💊",
+        "name": "鱼跃医疗",
+        "desc": "家用医疗器械龙头企业",
+        "status": "leader"
+      },
+      {
+        "icon": "🤖",
+        "name": "傅利叶智能",
+        "desc": "康复机器人和智能辅具",
+        "status": "growing"
+      },
+      {
+        "icon": "🏠",
+        "name": "亲和源",
+        "desc": "高端养老社区运营商",
+        "status": "growing"
+      },
+      {
+        "icon": "📱",
+        "name": "小米",
+        "desc": "智能穿戴和健康监测设备",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1581578731117-104f2a863ecc?w=800",
+      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f28a?w=800",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
+    ]
+  },
+  {
+    "title": "预制菜：厨房革命正在发生",
+    "industry": "消费",
+    "icon": "🍳",
+    "color": "#f39c12",
+    "time": "1 天前",
+    "trend": "hot",
+    "trendText": "🔥 热门",
+    "summary": "预制菜行业正在经历爆发式增长，从 B 端餐饮向 C 端家庭快速渗透。年轻人追求便捷、健康的饮食方式，推动预制菜市场持续扩容。",
+    "data": {
+      "value": "5000 亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 180,
+    "investors": "高",
+    "tags": ["预制菜", "餐饮", "消费升级", "便捷生活"],
+    "sourceUrl": "https://www.yili.com",
+    "sourceName": "伊利集团",
+    "reasons": [
+      {
+        "title": "生活方式变化",
+        "desc": "年轻人工作节奏快，追求便捷烹饪方式"
+      },
+      {
+        "title": "技术进步",
+        "desc": "冷链物流和食品加工技术进步，保证口感和营养"
+      },
+      {
+        "title": "疫情催化",
+        "desc": "疫情培养了家庭烹饪习惯，预制菜成为首选"
+      },
+      {
+        "title": "资本加持",
+        "desc": "大量资本涌入，推动行业快速发展"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2026 年，预制菜市场规模将突破万亿",
+      "growthRate": "年复合增长率超过 20%",
+      "timeframe": "2024-2026"
+    },
+    "companies": [
+      {
+        "icon": "🥟",
+        "name": "安井食品",
+        "desc": "速冻食品和预制菜龙头企业",
+        "status": "leader"
+      },
+      {
+        "icon": "🍜",
+        "name": "味知香",
+        "desc": "半成品菜行业领先企业",
+        "status": "leader"
+      },
+      {
+        "icon": "🥘",
+        "name": "国联水产",
+        "desc": "水产预制菜领先品牌",
+        "status": "growing"
+      },
+      {
+        "icon": "🍱",
+        "name": "盒马工坊",
+        "desc": "新零售预制菜品牌",
+        "status": "growing"
+      },
+      {
+        "icon": "🍲",
+        "name": "舌尖英雄",
+        "desc": "预制菜新零售品牌",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800",
+      "https://images.unsplash.com/photo-1476718406336-bb5a9690b7a9?w=800"
+    ]
+  },
+  {
+    "title": "低空经济：无人机产业进入爆发期",
+    "industry": "科技",
+    "icon": "🚁",
+    "color": "#3f51b5",
+    "time": "2 天前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "低空经济正在成为新的战略性新兴产业，无人机在物流配送、农业植保、电力巡检、航拍测绘等领域的应用快速拓展，市场规模持续扩大。",
+    "data": {
+      "value": "3000 亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 120,
+    "investors": "中高",
+    "tags": ["低空经济", "无人机", "智能制造", "物流"],
+    "sourceUrl": "https://www.dji.com",
+    "sourceName": "大疆创新",
+    "reasons": [
+      {
+        "title": "政策松绑",
+        "desc": "低空空域管理改革，为产业发展扫清障碍"
+      },
+      {
+        "title": "技术成熟",
+        "desc": "飞控、导航、通信等技术日益成熟"
+      },
+      {
+        "title": "应用场景丰富",
+        "desc": "从消费级到工业级，应用场景不断拓展"
+      },
+      {
+        "title": "产业链完善",
+        "desc": "上下游产业链条完整，成本持续下降"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2030 年，低空经济规模将超过 2 万亿元",
+      "growthRate": "年复合增长率超过 25%",
+      "timeframe": "2024-2030"
+    },
+    "companies": [
+      {
+        "icon": "🎯",
+        "name": "大疆创新",
+        "desc": "全球消费级无人机龙头",
+        "status": "leader"
+      },
+      {
+        "icon": "📦",
+        "name": "顺丰",
+        "desc": "物流无人机配送先行者",
+        "status": "leader"
+      },
+      {
+        "icon": "🌾",
+        "name": "极飞科技",
+        "desc": "农业无人机领先企业",
+        "status": "growing"
+      },
+      {
+        "icon": "⚡",
+        "name": "亿航智能",
+        "desc": "载人级自动驾驶飞行器",
+        "status": "growing"
+      },
+      {
+        "icon": "🔍",
+        "name": "纵横股份",
+        "desc": "工业级无人机系统",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1507581134111-1426342c4832?w=800",
+      "https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?w=800",
+      "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800"
+    ]
+  },
+  {
+    "title": "Web3.0：区块链重塑数字经济信任体系",
+    "industry": "科技",
+    "icon": "⛓️",
+    "color": "#9b59b6",
+    "time": "3 天前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "Web3.0 正在重新定义互联网的价值分配方式，通过区块链技术实现去中心化、用户自治和数据确权。NFT、DeFi、DAO 等创新应用不断涌现。",
+    "data": {
+      "value": "1500 亿",
+      "label": "市场规模 (美元)"
+    },
+    "change": 95,
+    "investors": "中",
+    "tags": ["Web3.0", "区块链", "NFT", "去中心化"],
+    "sourceUrl": "https://ethereum.org",
+    "sourceName": "以太坊官网",
+    "reasons": [
+      {
+        "title": "技术基础设施完善",
+        "desc": "公链、跨链、存储等基础设施日益完善"
+      },
+      {
+        "title": "应用场景落地",
+        "desc": "从数字藏品到供应链金融，应用持续落地"
+      },
+      {
+        "title": "监管逐步清晰",
+        "desc": "各国监管框架逐步建立，行业走向规范"
+      },
+      {
+        "title": "巨头布局",
+        "desc": "科技巨头纷纷布局 Web3.0 领域"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2030 年，Web3.0 市场规模将超过 1 万亿美元",
+      "growthRate": "年复合增长率超过 35%",
+      "timeframe": "2024-2030"
+    },
+    "companies": [
+      {
+        "icon": "💎",
+        "name": "蚂蚁链",
+        "desc": "企业级区块链平台",
+        "status": "leader"
+      },
+      {
+        "icon": "🔗",
+        "name": "腾讯至信链",
+        "desc": "腾讯区块链基础设施",
+        "status": "leader"
+      },
+      {
+        "icon": "🎨",
+        "name": "OpenSea",
+        "desc": "全球最大 NFT 交易平台",
+        "status": "growing"
+      },
+      {
+        "icon": "🦄",
+        "name": "Uniswap",
+        "desc": "去中心化交易所龙头",
+        "status": "growing"
+      },
+      {
+        "icon": "🏛️",
+        "name": "MakerDAO",
+        "desc": "去中心化自治组织",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1639762681485-074b01f38a05?w=800",
+      "https://images.unsplash.com/photo-1621503933197-2f0f5e1e9fdd?w=800",
+      "https://images.unsplash.com/photo-1620321023374-d1a68fddadb3?w=800"
+    ]
+  },
+  {
+    "title": "智能制造：工业 4.0 加速落地",
+    "industry": "制造",
+    "icon": "🏭",
+    "color": "#34495e",
+    "time": "3 天前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "随着 5G、AI、物联网等技术的成熟，智能制造正在从概念走向实践。数字化工厂、柔性制造、预测性维护等应用快速普及，推动制造业转型升级。",
+    "data": {
+      "value": "4.5 万亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 75,
+    "investors": "中高",
+    "tags": ["智能制造", "工业 4.0", "数字化转型", "5G"],
+    "sourceUrl": "https://www.siemens.com",
+    "sourceName": "西门子官网",
+    "reasons": [
+      {
+        "title": "政策支持",
+        "desc": "国家大力推进制造业数字化转型"
+      },
+      {
+        "title": "技术成熟",
+        "desc": "5G、AI、工业互联网等技术日益成熟"
+      },
+      {
+        "title": "成本下降",
+        "desc": "自动化设备和传感器成本持续下降"
+      },
+      {
+        "title": "人才储备",
+        "desc": "智能制造相关人才队伍不断壮大"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2027 年，智能制造市场规模将超过 7 万亿元",
+      "growthRate": "年复合增长率超过 12%",
+      "timeframe": "2024-2027"
+    },
+    "companies": [
+      {
+        "icon": "⚙️",
+        "name": "西门子",
+        "desc": "工业自动化和数字化解决方案",
+        "status": "leader"
+      },
+      {
+        "icon": "🤖",
+        "name": "发那科",
+        "desc": "工业机器人和数控系统",
+        "status": "leader"
+      },
+      {
+        "icon": "🔧",
+        "name": "汇川技术",
+        "desc": "工业自动化控制产品",
+        "status": "growing"
+      },
+      {
+        "icon": "📡",
+        "name": "树根互联",
+        "desc": "工业互联网平台",
+        "status": "growing"
+      },
+      {
+        "icon": "🏗️",
+        "name": "徐工信息",
+        "desc": "工程机械工业互联网平台",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1581091226825-a6a286581076?w=800",
+      "https://images.unsplash.com/photo-1565439398533-3145b3f6e062?w=800",
+      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800"
+    ]
+  },
+  {
+    "title": "元宇宙：虚拟现实与现实的深度融合",
+    "industry": "科技",
+    "icon": "🥽",
+    "color": "#1abc9c",
+    "time": "4 天前",
+    "trend": "stable",
+    "trendText": "➡️ 稳定",
+    "summary": "元宇宙概念经过炒作期后，正在回归理性发展。VR/AR 硬件持续迭代，应用场景从游戏娱乐向教育、医疗、办公等领域拓展。",
+    "data": {
+      "value": "800 亿",
+      "label": "市场规模 (美元)"
+    },
+    "change": 45,
+    "investors": "中",
+    "tags": ["元宇宙", "VR/AR", "虚拟现实", "数字孪生"],
+    "sourceUrl": "https://www.meta.com",
+    "sourceName": "Meta 官网",
+    "reasons": [
+      {
+        "title": "硬件进步",
+        "desc": "VR/AR 设备更轻便、清晰、便宜"
+      },
+      {
+        "title": "内容丰富",
+        "desc": "游戏、社交、办公等内容生态逐步完善"
+      },
+      {
+        "title": "5G 普及",
+        "desc": "5G 网络为元宇宙提供基础设施"
+      },
+      {
+        "title": "企业布局",
+        "desc": "科技巨头持续投入元宇宙相关技术"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2030 年，全球元宇宙市场规模将超过 5000 亿美元",
+      "growthRate": "年复合增长率超过 30%",
+      "timeframe": "2024-2030"
+    },
+    "companies": [
+      {
+        "icon": "👓",
+        "name": "Meta",
+        "desc": "Quest 系列 VR 头显",
+        "status": "leader"
+      },
+      {
+        "icon": "🎮",
+        "name": "索尼",
+        "desc": "PlayStation VR",
+        "status": "leader"
+      },
+      {
+        "icon": "🥽",
+        "name": "PICO",
+        "desc": "字节旗下 VR 品牌",
+        "status": "growing"
+      },
+      {
+        "icon": "💻",
+        "name": "微软",
+        "desc": "HoloLens 混合现实设备",
+        "status": "growing"
+      },
+      {
+        "icon": "🎬",
+        "name": "英伟达",
+        "desc": "Omniverse 数字孪生平台",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800",
+      "https://images.unsplash.com/photo-1626125345510-047f69638950?w=800",
+      "https://images.unsplash.com/photo-1592478411213-61535fdd861d?w=800"
+    ]
+  },
+  {
+    "title": "跨境电商：国货出海新机遇",
+    "industry": "电商",
+    "icon": "🌍",
+    "color": "#e67e22",
+    "time": "5 天前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "中国跨境电商持续高速增长，SHEIN、Temu、TikTok Shop 等平台在海外快速扩张，带动国货品牌走向世界。",
+    "data": {
+      "value": "2.3 万亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 110,
+    "investors": "高",
+    "tags": ["跨境电商", "国货出海", "DTC", "全球化"],
+    "sourceUrl": "https://www.shein.com",
+    "sourceName": "SHEIN 官网",
+    "reasons": [
+      {
+        "title": "供应链优势",
+        "desc": "中国完善的供应链体系提供强大支撑"
+      },
+      {
+        "title": "平台崛起",
+        "desc": "SHEIN、Temu 等平台打开海外市场"
+      },
+      {
+        "title": "品牌升级",
+        "desc": "国货品牌从低价向品质、品牌转型"
+      },
+      {
+        "title": "物流完善",
+        "desc": "跨境物流时效和成本持续优化"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2027 年，跨境电商规模将突破 5 万亿元",
+      "growthRate": "年复合增长率超过 18%",
+      "timeframe": "2024-2027"
+    },
+    "companies": [
+      {
+        "icon": "👗",
+        "name": "SHEIN",
+        "desc": "快时尚跨境电商龙头",
+        "status": "leader"
+      },
+      {
+        "icon": "🛒",
+        "name": "Temu",
+        "desc": "拼多多旗下跨境电商平台",
+        "status": "leader"
+      },
+      {
+        "icon": "📱",
+        "name": "TikTok Shop",
+        "desc": "社交电商出海",
+        "status": "growing"
+      },
+      {
+        "icon": "📦",
+        "name": "安克创新",
+        "desc": "消费电子出海品牌",
+        "status": "growing"
+      },
+      {
+        "icon": "🏷️",
+        "name": "花西子",
+        "desc": "美妆品牌出海代表",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+      "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800",
+      "https://images.unsplash.com/photo-1567427018100-71ab24006d08?w=800"
+    ]
+  },
+  {
+    "title": "生物医药：创新药迎来黄金发展期",
+    "industry": "医疗",
+    "icon": "💊",
+    "color": "#16a085",
+    "time": "1 周前",
+    "trend": "up",
+    "trendText": "📈 上升",
+    "summary": "中国生物医药产业持续创新，PD-1、CAR-T 等创新药陆续上市，国产替代加速，国际化进程稳步推进。",
+    "data": {
+      "value": "1.8 万亿",
+      "label": "市场规模 (人民币)"
+    },
+    "change": 90,
+    "investors": "高",
+    "tags": ["生物医药", "创新药", "医疗健康", "国产替代"],
+    "sourceUrl": "https://www.hengrui.com",
+    "sourceName": "恒瑞医药",
+    "reasons": [
+      {
+        "title": "政策支持",
+        "desc": "药审改革加速创新药审批"
+      },
+      {
+        "title": "资本涌入",
+        "desc": "大量资本投入生物医药研发"
+      },
+      {
+        "title": "人才回流",
+        "desc": "海外高端人才回国创业"
+      },
+      {
+        "title": "市场扩容",
+        "desc": "医保目录扩容，创新药支付能力提升"
+      }
+    ],
+    "forecast": {
+      "marketSize": "到 2030 年，生物医药市场规模将超过 4 万亿元",
+      "growthRate": "年复合增长率超过 15%",
+      "timeframe": "2024-2030"
+    },
+    "companies": [
+      {
+        "icon": "💉",
+        "name": "恒瑞医药",
+        "desc": "国内创新药龙头",
+        "status": "leader"
+      },
+      {
+        "icon": "🧬",
+        "name": "百济神州",
+        "desc": "国际化生物制药公司",
+        "status": "leader"
+      },
+      {
+        "icon": "🔬",
+        "name": "信达生物",
+        "desc": "生物创新药企业",
+        "status": "growing"
+      },
+      {
+        "icon": "🏥",
+        "name": "药明康德",
+        "desc": "医药研发外包龙头",
+        "status": "growing"
+      },
+      {
+        "icon": "🧪",
+        "name": "君实生物",
+        "desc": "创新生物制品企业",
+        "status": "potential"
+      }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800",
+      "https://images.unsplash.com/photo-1532187863486-abf9fad1e743?w=800",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800"
+    ]
+  }
+]

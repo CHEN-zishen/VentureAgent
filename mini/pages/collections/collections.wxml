@@ -1,0 +1,31 @@
+<view class="container">
+  <scroll-view class="collections-list" scroll-y="true">
+    <view class="collection-card" 
+          wx:for="{{collections}}" 
+          wx:key="id"
+          bindtap="goToCase" 
+          data-id="{{item.id}}">
+      <view class="card-cover" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}99 100%);">
+        <text class="card-emoji">{{item.emoji}}</text>
+      </view>
+      <view class="card-info">
+        <text class="card-title">{{item.title}}</text>
+        <text class="card-category">{{item.category}}</text>
+        <view class="card-meta">
+          <text class="meta-item">⭐ {{item.rating}}</text>
+          <text class="meta-item">👥 {{item.participants}}</text>
+        </view>
+      </view>
+      <view class="card-action" bindtap="removeCollect" data-id="{{item.id}}">
+        <text>❤️</text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{collections.length === 0}}">
+      <text class="empty-icon">❤️</text>
+      <text class="empty-text">暂无收藏</text>
+      <text class="empty-tip">去收藏感兴趣的案例吧</text>
+      <view class="empty-btn" bindtap="goToCases">浏览案例</view>
+    </view>
+  </scroll-view>
+</view>

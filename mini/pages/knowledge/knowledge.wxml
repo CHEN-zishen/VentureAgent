@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="knowledge-header">
+    <view class="header-title">📚 商业知识图谱</view>
+    <text class="header-subtitle">系统化学习商业知识体系</text>
+  </view>
+
+  <view class="knowledge-tabs">
+    <view class="tab-item {{currentTab === index ? 'active' : ''}}" 
+          wx:for="{{tabs}}" 
+          wx:key="index"
+          bindtap="switchTab" 
+          data-index="{{index}}">
+      {{item}}
+    </view>
+  </view>
+
+  <scroll-view class="knowledge-content" scroll-y="true">
+    <view class="category-section" wx:for="{{categories}}" wx:key="id">
+      <view class="category-header" bindtap="toggleCategory" data-id="{{item.id}}">
+        <view class="category-info">
+          <view class="category-icon" style="background: {{item.color}}20;">
+            <text style="font-size: 40rpx;">{{item.icon}}</text>
+          </view>
+          <view class="category-text">
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-count">{{item.count}}个知识点</text>
+          </view>
+        </view>
+        <text class="toggle-icon {{item.expanded ? 'expanded' : ''}}">▼</text>
+      </view>
+
+      <view class="knowledge-list" wx:if="{{item.expanded}}">
+        <view class="knowledge-item" 
+              wx:for="{{item.knowledgeList}}" 
+              wx:for-item="knowledge"
+              wx:key="id"
+              bindtap="goToDetail" 
+              data-id="{{knowledge.id}}">
+          <view class="knowledge-icon-small">
+            <text>{{knowledge.level}}</text>
+          </view>
+          <view class="knowledge-info">
+            <text class="knowledge-title">{{knowledge.title}}</text>
+            <text class="knowledge-desc">{{knowledge.summary}}</text>
+          </view>
+          <view class="knowledge-progress" wx:if="{{knowledge.progress > 0}}">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: {{knowledge.progress}}%; background: {{item.color}};"></view>
+            </view>
+            <text class="progress-text">{{knowledge.progress}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="learning-path" wx:if="{{currentTab === 0}}">
+      <view class="path-title">🎯 推荐学习路径</view>
+      <view class="path-steps">
+        <view class="path-step" wx:for="{{learningPath}}" wx:key="index">
+          <view class="step-number" style="background: {{item.color}};">{{index + 1}}</view>
+          <view class="step-content">
+            <text class="step-title">{{item.title}}</text>
+            <text class="step-desc">{{item.desc}}</text>
+          </view>
+          <view class="step-arrow" wx:if="{{index < learningPath.length - 1}}">→</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

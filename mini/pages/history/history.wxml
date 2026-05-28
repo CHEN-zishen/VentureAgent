@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="history-header">
+    <text class="history-count">共 {{history.length}} 条学习记录</text>
+    <text class="clear-btn" bindtap="clearHistory" wx:if="{{history.length > 0}}">清空</text>
+  </view>
+
+  <scroll-view class="history-list" scroll-y="true">
+    <view class="history-item" 
+          wx:for="{{history}}" 
+          wx:key="id">
+      <view class="item-time">{{item.time}}</view>
+      <view class="item-content" bindtap="goToCase" data-id="{{item.id}}">
+        <text class="item-emoji">{{item.emoji}}</text>
+        <view class="item-info">
+          <text class="item-title">{{item.title}}</text>
+          <text class="item-category">{{item.category}}</text>
+        </view>
+        <text class="item-arrow">></text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{history.length === 0}}">
+      <text class="empty-icon">📜</text>
+      <text class="empty-text">暂无学习历史</text>
+      <text class="empty-tip">开始学习后这里会记录您的足迹</text>
+      <view class="empty-btn" bindtap="goToCases">开始学习</view>
+    </view>
+  </scroll-view>
+</view>
